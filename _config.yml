@@ -9,7 +9,7 @@
 title: Rain's Blog 
 brief-intro: Rain's Blog
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://rainsun.github.io" # the base hostname & protocol for your site
+url: "https://lrainsun.github.io" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
