@@ -29,7 +29,7 @@ In Linux, there are two kinds of clocks:
   * The hardware clock can be set from the BIOS setup screen or from whatever operating system is running
   * It keeps track of time when the system is turned off but is not used when the system is running. 
 
-As time is so important, so how to synchonize time? NTP is the most often used protocol.
+As time is so important, so how to synchronize time? NTP is the most often used protocol.
 
 # NTP (Network Time Protocol)
 
@@ -155,7 +155,7 @@ NTP uses a hierarchical, semi-layered system of time sources. Each level of this
     ```
 
 
-# Why time drift after live migation
+# Why time drift after live migration
 
 When migrating VMs, the VM will be paused for a while but not restarted, so there can be a time difference of several seconds or more when the VM resumes. The problem also exists when we pause a VM. Linux guest which is paused via the hypervisor, does not longer "catch up" with realtime. The guests time stays behind for the duration of the pause.
 
@@ -188,7 +188,7 @@ So with -x, if the time is off by up to 600s, ntpd will gradually adjust it, rat
 
 And since the slew rate of typical Unix kernels is limited to 0.5 ms/s, each second of adjustment requires an amortization interval of 2000 s. Thus, an adjustment as much as 600s will take almost 14 days to complete.
 
-For "-g" option: Normally,  ntpd exits with a message to the system log if the offset exceeds the panic threshold, which is 1000 s by default. This option allows the time to be set to any value without restriction; however, this can happen only once. If the threshold is exceeded after that,  ntpd will exit with a message to the system log.
+For "-g" option: Normally,  ntpd exits with a message to the system log if the offset exceeds the panic threshold, which is 1000s by default. This option allows the time to be set to any value without restriction; however, this can happen only once. If the threshold is exceeded after that,  ntpd will exit with a message to the system log.
 
 Other configuration is panic threshold: Specifies the panic threshold in seconds with default 1000s. If set to zero,the panic sanity check is disabled and a clock offset of any value will be accepted.
 
@@ -202,7 +202,7 @@ So, here we come to a conclusion:
 Something can be done to improve the situation (inside the VM):
 
 1. remove "-x" option from /etc/sysconfig/ntpd
-2. set "tinker setpout" options in /etc/ntp.conf: tinker stepout 10
+2. set "tinker stepout" options in /etc/ntp.conf: tinker stepout 10
 3. set "tinker panic" options in /etc/ntp.conf: tinker panic 0   
 
 ## Use More NTP Servers
