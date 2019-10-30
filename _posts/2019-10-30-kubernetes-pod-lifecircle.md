@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Kubernetes Pod生命周期"
-date:   2019-10-30 21:23:00
+date:   2019-10-30 21:50:00
 categories: Kubernetes
 tags: Kubernetes-Pod
 excerpt: Kubernetes Pod生命周期
@@ -22,6 +22,10 @@ Pod对象自从其创建开始，一直到它终止退出的时间范围称为Po
 * Succeeded：Pod中的所有容器都已经成功终止并且不会重启
 * Failed：所有容器都已经终止，但至少有一个容器终止失败，即容器返回了非0值的退出状态或者已经被系统终止
 * Unknown：API Server无法正常获取到Pod对象的状态信息，通常是由于其无法与所在工作节点的kubelet通信所致
+
+# Pod Status
+
+Pod有个PodStatus对象，其中包含一个 [PodCondition](https://kubernetes.io/docs/resources-reference/v1.7/#podcondition-v1-core) 数组。 PodCondition 用于描述造成当前status的具体原因是什么。可能的值有 PodScheduled、Ready、Initialized 和 Unschedulable。
 
 # Pod生命周期
 
