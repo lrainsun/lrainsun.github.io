@@ -34,7 +34,7 @@ Pod对象自从其创建开始，一直到它终止退出的时间范围称为Po
 * readiness probe（O）
 * pre stop hook（O）
 
-![img](../img/loap.png)
+![img](/assets/images/loap-20191030211604014.png)
 
 1. 图里面没有画出来的是，在所有这些之前，infra container先会被创建，用来hold住namespace，等待其他container join
 2. 如果定义了init container，那么它将会最先被创建，通常init container用于为主容器执行一些预置操作
@@ -51,7 +51,7 @@ Pod对象自从其创建开始，一直到它终止退出的时间范围称为Po
 
 ## Pod的创建流程
 
-![image-20191030204230087](../img/image-20191030204230087.png)
+![image-20191030211642133](/assets/images/image-20191030211642133.png)
 
 1. 用户通过kubectl或者其他API客户端提交Pod Spec给API Server
 2. API Server尝试着将Pod对象的相关信息存入ETCD，待写入操作执行完成，API Server即会返回确认信息至客户端
@@ -66,7 +66,7 @@ Pod对象自从其创建开始，一直到它终止退出的时间范围称为Po
 
 ## Pod的终止过程
 
-![image-20191030204214503](../img/image-20191030204214503.png)
+![image-20191030211707070](/assets/images/image-20191030211707070.png)
 
 1. 用户发送删除Pod对象的命令
 2. API Server中的对象会随着时间的推移而更新，在前面说过的grace period （默认30s），Pod被视为”dead"
