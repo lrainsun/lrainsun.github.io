@@ -53,3 +53,5 @@ plugins: [jekyll-paginate]
 paginate: 6
 
 theme: jekyll-theme-slate
+
+future: true
