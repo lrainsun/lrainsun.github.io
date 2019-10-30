@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Kubernetes Pod生命周期"
-date:   2019-10-30
+date:   2019-10-30 21:23:00
 categories: Kubernetes
 tags: Kubernetes-Pod
 excerpt: Kubernetes Pod生命周期
