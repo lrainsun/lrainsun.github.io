@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Time Drift after Live Migration"
-date:   2019-10-29
+date:   2019-10-29 17:30:00 +0800
 categories: Openstack
 tags: Openstack-Nova
 excerpt: Research on time drift after live migration in openstack

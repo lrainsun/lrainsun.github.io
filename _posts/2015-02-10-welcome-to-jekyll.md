@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "hello jekyll!"
-date:   2015-02-10 15:14:54
+date:   2015-02-10 15:14:54 +0800
 categories: Others
 tags: Others
 excerpt: hello jekyll

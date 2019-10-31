@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "kubeadm部署kubernetes cluster"
-date:   2019-10-27
+date:   2019-10-27 23:30:00 +0800
 categories: Kubernetes
 tags: Kubernetes-Env
 excerpt: 用kubeadm部署kubernetes cluster

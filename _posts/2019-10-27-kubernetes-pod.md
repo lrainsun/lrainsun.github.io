@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Kubernetes Pod基本概念"
-date:   2019-10-27
+date:   2019-10-27 17:30:00 +0800
 categories: Kubernetes
 tags: Kubernetes-Pod
 excerpt: Kubernetes最基本的概念Pod
