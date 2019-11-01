@@ -196,7 +196,7 @@ So, here we come to a conclusion:
 
 1. with "-x" option, ntpd will gradually adjust the time if the offset is less than 600s
 2. with "-x" option, ntpd will step the time if the offset is greater than 600s
-3. ntpd will step the time after 900s (default value) as stepout threshold not configured
+3. ntpd will step the time after 900s (default value) as stepout threshold not configured (That means although offset if greater than 600s,  if stepout threshold not exceeded, ntpd will not step the time)
 4. ntpd service will exit if offset (time between local & ntp server) exceed 1000s twice (default value) as panic threshold not configured
 
 Something can be done to improve the situation (inside the VM):
