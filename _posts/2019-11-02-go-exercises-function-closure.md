@@ -26,8 +26,15 @@ import "fmt"
 
 // fibonacci 函数会返回一个返回 int 的函数。
 func fibonacci() func() int {
-	r, sum1, sum2 := 0, 1, 1
+	r, sum1, sum2 := 0, 0, 0
 	return func() int {
+		if sum1 == 0 {
+			sum1 = 1
+			return 1
+		} else if sum2 == 0 {
+			sum2 = 1
+			return 1
+		}
 		r = sum1 + sum2
 		sum1 = sum2
 		sum2 = r
@@ -37,7 +44,7 @@ func fibonacci() func() int {
 
 func main() {
 	f := fibonacci()
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 20; i++ {
 		fmt.Println(f())
 	}
 }
