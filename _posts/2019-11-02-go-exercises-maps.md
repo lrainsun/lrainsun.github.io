@@ -1,5 +1,4 @@
 ```
----
 layout: post
 title:  "Go Map的练习"
 date:   2019-11-02 09:47:00 +0800
@@ -8,8 +7,6 @@ tags: Go-Exercises
 excerpt: Go Map的练习
 mathjax: true
 typora-root-url: ../
-
----
 ```
 
 ## 练习：map
