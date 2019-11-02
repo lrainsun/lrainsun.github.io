@@ -1,3 +1,4 @@
+```
 ---
 layout: post
 title:  "Go Map的练习"
@@ -9,6 +10,7 @@ mathjax: true
 typora-root-url: ../
 
 ---
+```
 
 ## 练习：map
 
@@ -36,8 +38,6 @@ func WordCount(s string) map[string]int {
 func main() {
 	Test(WordCount)
 }
-
-
 
 // Test runs a test suite against f.
 func Test(f func(string) map[string]int) {
