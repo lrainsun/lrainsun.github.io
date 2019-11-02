@@ -2,7 +2,7 @@
 layout: post
 title:  "Kubernetes RBAC"
 date:   2019-11-01 22:03:00 +0800
-categories: Go
+categories: Kubernetes
 tags: Kubernetes-RBAC
 excerpt: Kubernetes里基于角色的权限控制
 mathjax: true
