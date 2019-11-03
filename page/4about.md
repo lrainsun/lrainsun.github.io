@@ -15,7 +15,8 @@ type: page
 ## 联系我
 
 * GitHub：[Rain Sun](https://github.com/lrainsun)
-* email：lrain.sm@gmail.com
+* Email：lrain.sm@gmail.com
+* WeChat：qq66595645
 
 ## 友情链接
 
