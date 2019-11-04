@@ -1,54 +1,27 @@
 ---
 
 layout: post
-title:  "Words that you SHOULD NOT use"
-date:   2019-11-04 23:03:00 +0800
+title:  "How to remember things"
+date:   2019-11-04 23:35:00 +0800
 categories: EnglishLearning
-tags: English-grammar
-excerpt: Words that you SHOULD NOT use
+tags: English-Method
+excerpt: Two pieces of advises for how to remember things
 mathjax: true
 typora-root-url: ../
 ---
 
-# odd -> weird
+Why it is easier to understand things that you hear, but harder to say them back?
 
-That's a little bit weird.
+Here are two pieces of advice:
 
-1, 3, 5, 7, they are odd numbers.
+1. If you want to remember something, you need to explain it to somebody else.  
 
-# Don't mention it -> Don't remind me
+   When you are listening, you are just learning passively. Things are going into your passive memory. 
 
-Andrew, I heard your ex-girlfriend is dating Justin Bieber.
+   But when you explain something to someone else, it has to be from your ACTIVE memory, from your active vocabulary. And when things are coming out, that is when you remember it. 
 
-Don't remind me.
+2. When you guess something, When you take a guess and you get it correct.. by accident, you never forget this. And I think this is completely true. It's like when you guess something and you're like ￣□￣｜｜ and then it turns out to be right. 
 
 
 
-Andrew, thanks for doing this.
-
-Don't mention it.
-
-# seldom -> barely, rarely
-
-I rarely hear the word "seldom" used.
-
-# treat you -> my treat
-
-This is my treat. 
-
-Don't use treat as a verb.
-
-# supper -> dinner
-
-If you are under 60 years old, use "supper", don't use "dinner".
-
-# May I -> Can I
-
-You can use "Can I" instead of "May I" for everything.
-
-"May I" is just a little bit outdated.
-
-# Have a rest -> Take a break
-
-Take a break.
-
+So, take **MORE** risks and care **LESS** about making mistakes. 
