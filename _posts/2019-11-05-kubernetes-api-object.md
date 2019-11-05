@@ -69,3 +69,10 @@ kubernetes找到一个API对象的过程如下：
    -  Admission Controller 和 Initializer，就都属于 Admission 的内容
    - 而 Validation，则负责验证这个对象里的各个字段是否合法。这个被验证过的 API 对象，都保存在了 APIServer 里一个叫作 Registry 的数据结构中。也就是说，只要一个 API 对象的定义能在 Registry 里查到，它就是一个有效的 Kubernetes API 对象。
 7. 最后，APIServer 会把验证过的 API 对象转换成用户最初提交的版本，进行序列化操作，并调用 Etcd 的 API 把它保存起来
+
+# 声明式API的实现
+
+声明式API的实现在kubernetes里包括两部分：
+
+1. 声明式API对象的定义，像Pod，CronJob这种都属于内置的对象，除非之外还可以自定义API对象
+2. 而API对象的业务逻辑由控制器来实现，Deployment、DaemonSet都是内置控制器，同时也可以自定义控制器
