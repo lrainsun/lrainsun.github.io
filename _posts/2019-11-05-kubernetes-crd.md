@@ -15,7 +15,9 @@ CRD 的全称是 Custom Resource Definition。顾名思义，它指的就是，�
 
 前面控制器实现了API对象的业务逻辑，而CRD可以自定义API资源。
 
-我有一点点懒，先把概念记在这里，等到要用的时候再自己动手实践。嗯。。貌似是篇比较水的blog，O(∩_∩)O哈哈~ 强迫症表示这个需要记，所以没办法跳过，但是又不想现在实践
+我有一点点懒，先把概念记在这里，等到要用的时候再自己动手实践。嗯。。貌似是篇比较水的blog，O(∩_∩)O哈哈~ 
+
+还有*Dynamic Admission Controller*（Initializers）， *Admission Controller* 暂时先不想看
 
 CRD的定义包括哪些内容：
 
@@ -74,4 +76,3 @@ spec:
   cidr: "192.168.0.0/16"
   gateway: "192.168.0.1"
 ```
-
