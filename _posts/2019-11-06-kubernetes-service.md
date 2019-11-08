@@ -116,6 +116,14 @@ Service是由kube-proxy组件，加上iptables来共同实现的。
 对于我们创建的名叫hostnames的Service来说，一旦它被提交给Kubernetes，那么 kube-proxy 就可以通过 Service的Informer感知到这样一个Service对象的添加。而作为对这个事件的响应，它就会在宿主机上创建这样一条iptables规则：
 
 ```shell
+-A PREROUTING -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+-A OUTPUT -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+-A INPUT -m conntrack --ctstate NEW -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+-A FORWARD -m conntrack --ctstate NEW -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+-A OUTPUT -m conntrack --ctstate NEW -m comment --comment "kubernetes service portals" -j KUBE-SERVICES
+```
+
+```shell
 [root@rain-kubernetes-1 rain]# iptables-save | grep KUBE-SERVICES | grep 10.98.154.209
 -A KUBE-SERVICES -d 10.98.154.209/32 -p tcp -m comment --comment "default/hostnames:default cluster IP" -m tcp --dport 80 -j KUBE-SVC-ODX2UBAZM7RQWOIU
 ```
