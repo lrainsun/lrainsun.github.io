@@ -261,4 +261,3 @@ externalIPs:
 2. KUBE-SEP-(hash) 规则对应的 DNAT 链，这些规则应该与 Endpoints 一一对应；
 3. KUBE-SVC-(hash) 规则对应的负载均衡链，这些规则的数目应该与 Endpoints 数目一致；
 4. 如果是 NodePort 模式的话，还有 POSTROUTING 处的 SNAT 链。
-
