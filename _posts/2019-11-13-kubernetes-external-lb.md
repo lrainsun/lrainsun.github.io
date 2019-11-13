@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  " Kubernetes External LB"
-date:   2019-11-13 23:55:00 +0800
+title:  "Kubernetes External LB"
+date:   2019-11-13 17:55:00 +0800
 categories: Kubernetes
 tags: Kubernetes-Service
 excerpt: Kubernetes External LoadBalancer
