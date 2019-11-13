@@ -4,7 +4,7 @@ title:  "Kubernetes Ingress"
 date:   2019-11-11 23:55:00 +0800
 categories: Kubernetes
 tags: Kubernetes-Service
-excerpt: Kubernetes Service和Pod的DNS
+excerpt: Kubernetes Ingress介绍
 mathjax: true
 typora-root-url: ../
 ---
