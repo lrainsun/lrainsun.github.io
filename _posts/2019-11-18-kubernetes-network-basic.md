@@ -3,7 +3,7 @@ layout: post
 title:  "Kubernetes网络模型基础"
 date:   2019-11-18 14:55:00 +0800
 categories: Kubernetes
-tags: Kubernetes-Architecture
+tags: Kubernetes-Network
 excerpt: Kubernetes网络模型基础
 mathjax: true
 typora-root-url: ../
