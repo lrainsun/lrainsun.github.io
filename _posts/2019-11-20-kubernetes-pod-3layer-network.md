@@ -75,3 +75,20 @@ Calico跟flannel的host-gw模式很像，会在每台宿主机上添加路由规
 
 不同于 Flannel 通过 Etcd 和宿主机上的 flanneld 来维护路由信息的做法，Calico 项目使用了BGP来自动地在整个集群中分发路由信息。
 暂不深入看了。。
+
+# Flannel vxlan Directrouting模式
+
+VXLAN还有另外一种功能，VXLAN也支持类似host-gw的玩法，如果两个节点在同一网段时使用host-gw通信，如果不在同一网段中，即当前pod所在节点与目标pod所在节点中间有路由器，就使用VXLAN这种方式，使用叠加网络。
+结合了Host-gw和VXLAN，这就是VXLAN的**Directrouting模式**
+
+```yaml
+  net-conf.json: |
+    {
+      "Network": "10.168.0.0/16",
+      "Backend": {
+        "Type": "vxlan",
+        "Directrouting": true
+      }
+    }
+```
+
