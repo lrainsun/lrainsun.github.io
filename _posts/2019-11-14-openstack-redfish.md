@@ -204,6 +204,16 @@ For ironic part, we need:
 
 1. set boot device (BootSourceOverrideTarget)
 
+   ```shell
+   curl -X PATCH -k -u admin:Admin123 https://10.10.10.10/redfish/v1/Systems/FCH2131V13Z -d '
+   {
+       "Boot":{
+           "BootSourceOverrideTarget" : "Pxe",
+           "BootSourceOverrideEnabled" : "Once"
+       }
+   }'
+   ```
+
 2. power on 
 
    ```shell
@@ -221,12 +231,17 @@ For ironic part, we need:
 
 4. reboot
 
+   ```shell
+   curl -vv https://10.10.10.10/redfish/v1/Systems/FCH2005V1EN/Actions/System.Reset -d
+   '{"ResetType":"ForceRestart"}' --insecure -u admin:Admin123
+   ```
+
 For neutron part, we need:
 
 1. bind port, configure uplink switch vlan
 
 ```shell
-   curl -XPATCH -k -u admin https://10.10.10.10/redfish/v1/Managers/CIMC/EthernetInterfaces/NICs -d'
+   curl -X PATCH -k -u admin https://10.10.10.10/redfish/v1/Managers/CIMC/EthernetInterfaces/NICs -d'
    {"VLAN": {"VLANId": 2,"VLANEnable": true}}
 ```
 

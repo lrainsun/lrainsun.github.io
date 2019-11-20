@@ -377,3 +377,4 @@ rain-kubernetes-1上的coffee要与rain-kubernetes-2上的tea通信（10.168.0.1
 15. 接下来，rain-kubernetes-1 上的 flannel.1 设备就可以把这个数据帧从 rain-kubernetes-1的 eth0 网卡发出去。显然，这个帧会经过宿主机网络来到 rain-kubernetes-2的 eth0 网卡。
 16. rain-kubernetes-2 内核网络栈会发现这个数据帧里有 VXLAN Header，并且 VNI=1。所以 Linux内核会对它进行拆包，拿到里面的内部数据帧，然后根据 VNI 的值，把它交给 rain-kubernetes-2 上的flannel.1 设备。
 17. rain-kubernetes-2 上的flannel.1 设备则会进一步拆包，取出“原始 IP 包”。最终，IP 包就进入到了tea容器的 Network Namespace里。
+
