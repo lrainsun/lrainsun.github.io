@@ -314,6 +314,53 @@ func NewReplicaSetController(rsInformer appsinformers.ReplicaSetInformer, podInf
 }
 ```
 
+```go
+// NewBaseController is the implementation of NewReplicaSetController with additional injected
+// parameters so that it can also serve as the implementation of NewReplicationController.
+// replicaset controller定义了两个informer，rsinformer, podinformer，也就是说replicaset会关注rs和pod的变化
+func NewBaseController(rsInformer appsinformers.ReplicaSetInformer, podInformer coreinformers.PodInformer, kubeClient clientset.Interface, burstReplicas int,
+   gvk schema.GroupVersionKind, metricOwnerName, queueName string, podControl controller.PodControlInterface) *ReplicaSetController {
+   if kubeClient != nil && kubeClient.CoreV1().RESTClient().GetRateLimiter() != nil {
+      ratelimiter.RegisterMetricAndTrackRateLimiterUsage(metricOwnerName, kubeClient.CoreV1().RESTClient().GetRateLimiter())
+   }
+
+   rsc := &ReplicaSetController{
+      GroupVersionKind: gvk,
+      kubeClient:       kubeClient,
+      podControl:       podControl,
+      burstReplicas:    burstReplicas,
+      expectations:     controller.NewUIDTrackingControllerExpectations(controller.NewControllerExpectations()),
+      queue:            workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), queueName),
+   }
+
+   rsInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
+      AddFunc:    rsc.enqueueReplicaSet,
+      UpdateFunc: rsc.updateRS,
+      // This will enter the sync loop and no-op, because the replica set has been deleted from the store.
+      // Note that deleting a replica set immediately after scaling it to 0 will not work. The recommended
+      // way of achieving this is by performing a `stop` operation on the replica set.
+      DeleteFunc: rsc.enqueueReplicaSet,
+   })
+   rsc.rsLister = rsInformer.Lister() //在开始SyncLoop之前，先要list所有的replicaset
+   rsc.rsListerSynced = rsInformer.Informer().HasSynced
+
+   podInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
+      AddFunc: rsc.addPod,
+      // This invokes the ReplicaSet for every pod change, eg: host assignment. Though this might seem like
+      // overkill the most frequent pod update is status, and the associated ReplicaSet will only list from
+      // local storage, so it should be ok.
+      UpdateFunc: rsc.updatePod,
+      DeleteFunc: rsc.deletePod, // 添加add， update, delete
+   })
+   rsc.podLister = podInformer.Lister() //在开始SyncLoop之前，先要list所有的pod
+   rsc.podListerSynced = podInformer.Informer().HasSynced
+
+   rsc.syncHandler = rsc.syncReplicaSet
+
+   return rsc
+}
+```
+
 在Run里会启动控制循环:
 
 * 等待 Informer 完成一次本地缓存的数据同步操作
@@ -423,3 +470,27 @@ func (rsc *ReplicaSetController) syncReplicaSet(key string) error {
 }
 ```
 
+expectations是用来记录需要删除的pod的uid，使得他们不被重复计算
+
+```go
+	// A TTLCache of pod creates/deletes each rc expects to see.
+	expectations *controller.UIDTrackingControllerExpectations
+	
+// UIDTrackingControllerExpectations tracks the UID of the pods it deletes.
+// This cache is needed over plain old expectations to safely handle graceful
+// deletion. The desired behavior is to treat an update that sets the
+// DeletionTimestamp on an object as a delete. To do so consistently, one needs
+// to remember the expected deletes so they aren't double counted.
+// TODO: Track creates as well (#22599)
+type UIDTrackingControllerExpectations struct {
+	ControllerExpectationsInterface
+	// TODO: There is a much nicer way to do this that involves a single store,
+	// a lock per entry, and a ControlleeExpectationsInterface type.
+	uidStoreLock sync.Mutex
+	// Store used for the UIDs associated with any expectation tracked via the
+	// ControllerExpectationsInterface.
+	uidStore cache.Store
+}
+```
+
+controller的syncLoop其实充当的是消费者，从workqueue不断地取key进行处理，而图左侧Informer左侧，则是生产者，不断往workqueue里塞数据，后面会再分析。
