@@ -11,27 +11,20 @@ typora-root-url: ../
 
 # 入口
 
-kubelet启动的入口函数在 *k8s.io/kubernetes/cmd/genkubedocs/gen_kube_docs.go* main
+kubelet启动的入口函数在 *k8s.io/kubernetes/cmd/kubelet/kubelet.go* main
 
 ```go
 func main() {
-	// use os.Args instead of "flags" because "flags" will mess up the man pages!
-	path := ""
-	module := ""
-	if len(os.Args) == 3 {
-		path = os.Args[1]
-		module = os.Args[2]
-	} else {
-		fmt.Fprintf(os.Stderr, "usage: %s [output directory] [module] \n", os.Args[0])
+	rand.Seed(time.Now().UnixNano())
+
+	command := app.NewKubeletCommand()
+	logs.InitLogs()
+	defer logs.FlushLogs()
+
+	if err := command.Execute(); err != nil {
 		os.Exit(1)
 	}
-
-	switch module {
-  case "kubelet":
-		// generate docs for kubelet
-		kubelet := kubeletapp.NewKubeletCommand()
-		doc.GenMarkdownTree(kubelet, outDir)
-  }
+}
 ```
 
 *k8s.io/kubernetes/cmd/kubelet/app/server.go* NewKubeletCommand
