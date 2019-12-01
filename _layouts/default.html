@@ -20,7 +20,9 @@
         offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
       });
     </script>
-    <script src="/js/simple-jekyll-search.min.js"></script>
+    <!-- <script src="{{ " /js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
+        <script src="/js/simple-jekyll-search.min.js"></script>
+        <script>
 SimpleJekyllSearch({
     searchInput: document.getElementById('search-input'),
     resultsContainer: document.getElementById('results-container'),
@@ -30,7 +32,7 @@ SimpleJekyllSearch({
     limit: 20, // 返回最大文章数
     fuzzy: true // 是否模糊匹配
 })
-    <!-- <script src="{{ " /js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
+</script>
   </body>
 
 </html>

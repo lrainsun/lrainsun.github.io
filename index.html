@@ -7,6 +7,10 @@ layout: default
         <h1>Welcome to Rain's Blog!</h1>
         <small>这里记录着我的学习笔记</small>
         <hr>
+        <div id="search-container">
+            <input type="text" id="search-input" placeholder="search...">
+            <ul id="results-container"></ul>
+        </div>
         <ul>
             {% for post in paginator.posts %}
               <li>
