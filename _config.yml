@@ -56,3 +56,5 @@ theme: jekyll-theme-slate
 
 timezone: Europe/Amsterdam
 future: true
+
+destination: docs

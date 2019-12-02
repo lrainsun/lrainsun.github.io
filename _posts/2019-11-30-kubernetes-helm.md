@@ -88,26 +88,26 @@ mangodb/
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "mangodb.fullname" . }}
+  name: \{\{ include "mangodb.fullname" . \}\}
   labels:
-{{ include "mangodb.labels" . | indent 4 }}
+\{\{ include "mangodb.labels" . | indent 4 \}\}
 spec:
-  type: {{ .Values.service.type }}
+  type: \{\{ .Values.service.type \}\}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: \{\{ .Values.service.port \}\\}
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: {{ include "mangodb.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: \{\{ include "mangodb.name" . \}\}
+    app.kubernetes.io/instance: \{\{ .Release.Name \}\}
 ```
 
 类似`mangodb.fullname`和`mangodb.labels`这样的变量是在`templates/_helpers.tpl`里定义的
 
 ```shell
 [root@rain-kubernetes-1 mangodb]# grep "mangodb.fullname" -rn templates/_helpers.tpl
-14:{{- define "mangodb.fullname" -}}
+14:\{\{- define "mangodb.fullname" -\}\}
 ```
 
 而`.Values.service.port`则是在values.yaml里定义的
