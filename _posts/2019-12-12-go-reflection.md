@@ -242,4 +242,3 @@ func (u User) Hello(name string)  {
 }
 //hello rain , my name is OK
 ```
-
