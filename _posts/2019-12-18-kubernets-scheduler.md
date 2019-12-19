@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Kubernetes调度策略"
+title:  "Kubernetes调度"
 date:   2019-12-18 22:55:00 +0800
 categories: Kubernetes
 tags: Kubernetes-Scheduler
-excerpt: Kubernetes scheduler
+excerpt: Kubernetes调度
 mathjax: true
 typora-root-url: ../
 ---
