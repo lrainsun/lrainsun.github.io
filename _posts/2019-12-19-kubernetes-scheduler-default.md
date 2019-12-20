@@ -269,4 +269,3 @@ based on the total size of those images.
 - If some of the images are present on a node, the larger their sizes' sum, the higher the node's priority.
 
 在实际的执行过程中，调度器里关于集群和 Pod 的信息都已经缓存化，所以算法执行比较快
-
