@@ -221,4 +221,3 @@ func (im *realImageGCManager) GarbageCollect() error {
 ```
 
 image gc的时候需要知道磁盘的情况，这里有个statsProvider，对于runtime是docker而且系统是linux的情况，使用cadvisor，否则用CRI的接口。docker uses the built-in cadvisor to gather such metrics on Linux for historical reasons.
-
