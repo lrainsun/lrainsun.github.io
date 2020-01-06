@@ -2,7 +2,7 @@
 layout: post
 title:  "新年flag"
 date:   2020-01-05 23:59:00 +0800
-categories: Kubernetes
+categories: Others
 tags: Others
 excerpt: 新年flag
 mathjax: true
