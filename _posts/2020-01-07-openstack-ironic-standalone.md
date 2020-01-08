@@ -177,3 +177,12 @@ f2ebe0cceb16        kolla/centos-binary-rabbitmq:master           "dumb-init --s
 Unexpected exception for http://10.121.246.183:6385/v1/nodes: Failed to parse: http://10.121.246.183:6385/v1/nodes
 ```
 
+cli的问题最后发现是因为client版本跟server版本不一致导致，kolla我安装的是master的版本，而client装的是r版本。后来统一修改成train版本，问题得以解决。
+
+rc文件
+
+```shell
+export OS_AUTH_TYPE=none
+export OS_ENDPOINT=http://10.121.246.183:6385
+```
+
