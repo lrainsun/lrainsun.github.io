@@ -24,6 +24,37 @@ And It is possible to use the Bare Metal service without other OpenStack service
 
 尝试用kolla来做部署，需要提前安装ansible, docker，启动docker服务等。
 
+```shell
+yum install -y vim net-tools git python-devel libffi-devel gcc openssl-devel libselinux-python
+
+yum install epel-release
+sed -i 's+download.fedoraproject.org/pub+mirrors.ustc.edu.cn+' /etc/yum.repos.d/epel.repo
+yum install -y python-pip ansible
+pip install --upgrade pip
+pip install -U ansible
+
+cd /etc/yum.repos.d/
+wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum install docker-ce -y
+```
+
+开启 Docker 的共享挂载功能
+
+```shell
+mkdir /etc/systemd/system/docker.service.d
+tee /etc/systemd/system/docker.service.d/kolla.conf << 'EOF'
+[Service]
+MountFlags=shared
+EOF
+```
+
+启动docker
+
+```shell
+systemctl daemon-reload
+systemctl restart docker
+```
+
 然后下载kolla & kolla-ansible
 
 ```shell
@@ -36,7 +67,9 @@ pip install -r kolla-ansible/requirements.txt
 pip install --ignore-installed requests
 sudo pip install --ignore-installed PyYAML
 
-cd kolla-ansible && python setup.py install
+cd kolla-ansible 
+git checkout stable/train
+python setup.py install
 ```
 
 将globals.yml和passwords.yml复制到/etc/kolla目录
@@ -175,6 +208,13 @@ f2ebe0cceb16        kolla/centos-binary-rabbitmq:master           "dumb-init --s
 ```shell
 [root@rain-ironic-standalone ~]# openstack baremetal node list
 Unexpected exception for http://10.121.246.183:6385/v1/nodes: Failed to parse: http://10.121.246.183:6385/v1/nodes
+```
+
+安装openstack client
+
+```shell
+yum -y install python-openstackclient
+yum -y install python2-ironicclient
 ```
 
 cli的问题最后发现是因为client版本跟server版本不一致导致，kolla我安装的是master的版本，而client装的是r版本。后来统一修改成train版本，问题得以解决。
