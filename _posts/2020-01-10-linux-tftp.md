@@ -4,7 +4,7 @@ title:  "TFTP启动失败"
 date:   2020-10-10 23:00:00 +0800
 categories: Linux
 tags: Linux-Service
-excerpt: 平均负载
+excerpt: TFTP启动失败
 mathjax: true
 typora-root-url: ../
 ---
