@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "TFTP启动失败"
-date:   2020-10-10 23:00:00 +0800
+date:   2020-01-10 23:00:00 +0800
 categories: Linux
 tags: Linux-Service
 excerpt: TFTP启动失败
