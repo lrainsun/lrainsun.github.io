@@ -16,7 +16,7 @@ type: page
           {% endfor %}
         {% endcapture %}
         {% assign sortedtags = tags | split:' ' | sort %}
-
+        <ul id="results-container"></ul>
         <ul>
         {% for tag in sortedtags %}
           <h2 id="{{ tag }}">{{ tag }}</h2>

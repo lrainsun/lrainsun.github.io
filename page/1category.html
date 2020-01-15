@@ -11,6 +11,7 @@ type: page
     <div class="left">
         <h1>{{page.title}}</h1>
         <hr>
+        <ul id="results-container"></ul>
         <ul>
             {% for category in site.categories %}
             <h2 id="{{category | first}}">{{category | first}}</h2>
