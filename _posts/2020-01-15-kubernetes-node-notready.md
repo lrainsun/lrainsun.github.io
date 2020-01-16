@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Kubernetes node NotReady"
-date:   2020-01-25 22:55:00 +0800
+date:   2020-01-15 22:55:00 +0800
 categories: Kubernetes
 tags: Kubernetes-Env
 excerpt: hostname改变导致Kubernetes node NotReady
