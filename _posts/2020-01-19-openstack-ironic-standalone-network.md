@@ -8,27 +8,43 @@ excerpt: openstack standalone ironic Networking service
 mathjax: true
 ---
 
-# network service in ironic
+# network interface in ironic
 
 我们知道，当ironic跟openstack是集成在一起的时候，network service这块是neutron负责的，neutron会从他管理的网络里面为baremetal node分配deploy的时候使用的provision network，在deploy完成后会切换到tenant network。
 
-这个配置选项是在ironic.conf中，默认是neutron
+T版本中默认enable了flat & noop
 
 ```python
-[dhcp]
-
-#
-# From ironic
-#
-
-# DHCP provider to use. "neutron" uses Neutron, and "none"
-# uses a no-op provider. (string value)
-#dhcp_provider = neutron
+enabled_network_interfaces     = ['flat', 'noop']
 ```
 
-/usr/lib/python2.7/site-packages/ironic/drivers/modules/network/neutron.py 实现了neutron作为dhcp provider的实现。
+这个配置选项是在ironic.conf中可以修改
 
-比如add provision network的时候，会去调用neutron的接口
+```python
+enabled_network_interfaces = noop
+```
+
+当注册一个node的时候，有一个参数是Network_interface
+
+这个地方如果是flat的话
+
+> | network_interface | flat
+
+会调用/usr/lib/python2.7/site-packages/ironic/drivers/modules/network/flat.py的实现。
+
+比如add provision network的时候，会去调用neutron flat的接口
+
+```python
+def add_provisioning_network(self, task):
+    """Add the provisioning network to a node.
+
+    :param task: A TaskManager instance.
+    :raises: NetworkError when failed to set binding:host_id
+    """
+    self._bind_flat_ports(task)
+```
+
+如果是neutron，会调用/usr/lib/python2.7/site-packages/ironic/drivers/modules/network/neutron.py的实现
 
 ```python
     def add_provisioning_network(self, task):
@@ -49,11 +65,12 @@ mathjax: true
                 port.save()
 ```
 
-而在standalone的情况下，这个配置要改成none
+不管是flat还是neutron，都依赖了neutron的实现，所以在standalone的情况下，这个配置要改成none
 
-```python
-[dhcp]
-dhcp_provider=none
+也就是要把node的这个参数改成noop
+
+```shell
+openstack baremetal node set ab556e18-eacb-4947-aa7c-067cdd376b49 --network-interface noop
 ```
 
 这个时候，会调用到/usr/lib/python2.7/site-packages/ironic/drivers/modules/network/noop.py里的实现，而这里面都是空实现
@@ -68,3 +85,13 @@ dhcp_provider=none
 ```
 
 所以我理解对于standalone的情况，是没有两个阶段的provision network和tenant network的，day0的时候需要配置上联，跟dhcp server是可以通的，获取到的ip将是最终的IP。
+
+# Networking service in ironic
+
+我们知道，当neutron作为网络服务的时候，为baremetal node分配IP的是neutron dhcp agent。在standalone的情况下，dhcp provider需要我们自己来提供，这个配置在ironic.conf中，默认是neutron
+
+```python
+[dhcp]
+dhcp_provider=none
+```
+
