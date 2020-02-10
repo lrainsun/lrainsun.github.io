@@ -64,3 +64,22 @@ typora-root-url: ../
       - '{__name__!~".*:.*",job=~".+"}'
 ```
 
+# rule file的位置
+
+```yaml
+rule_files:
+- /etc/prometheus/record.rules
+- /etc/prometheus/haproxy_rule.rules
+- /etc/prometheus/memcached_rule.rules
+- /etc/prometheus/mysql_rule.rules
+- /etc/prometheus/rabbitmq_rule.rules
+- /etc/prometheus/ceph_rule.rules
+- /etc/prometheus/slo_30day.rules
+- /etc/prometheus/node_rule.rules
+- /etc/prometheus/libvirt_rule.rules
+- /etc/prometheus/slo_1min.rules
+```
+
+另外rule file的位置看起来是有讲究的，之前放在/etc/prometheus/rules下，怎么都Load不进去
+
+改到/etc/prometheus下才好，为啥还没整明白，但是目前只能放在/etc/prometheus下
