@@ -120,3 +120,9 @@ histogram_quantile(0.9, rate(http_request_duration_seconds_bucket[10m]))
 
 ![image-20200219231625126](/assets/images/image-20200219231625126.png)
 
+# prometheus数据样本
+
+Prometheus采集的数据样本都是以时间序列保存的，每个样本都由三部分组成：指标、样本值、时间戳。
+
+样本值（64位浮点数）和时间戳（精确到 ms）的组合代表在这个时间点采集到的监控数值。
+
