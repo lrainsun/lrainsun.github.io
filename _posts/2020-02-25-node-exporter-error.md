@@ -22,8 +22,9 @@ Limit of concurrent requests reached (40), try again later.
 [root@ci32sjcmp021 ~]# docker ps | grep node_exporter
 f7375c90cbc9        registry-qa.webex.com/ocp/node-exporter:v1.2      "/bin/node_exporter …"   2 months ago        Up 12 days                              prometheus_node_exporter
 
-[root@ci32sjcmp021 ~]# ps -ef| grep node_exporter
-nfsnobo+   9845   9763  0 Feb13 ?        00:11:26 /bin/node_exporter --path.procfs /host/proc --path.sysfs /host/sys --path.rootfs /host/root --web.listen-address 10.121.29.31:9100
+[root@ci32sjcmp021 ~]# ps axf | grep node_exporter
+433368 pts/2    S+     0:00                          \_ grep --color=auto node_exporter
+  9845 ?        Dsl   11:27      \_ /bin/node_exporter --path.procfs /host/proc --path.sysfs /host/sys --path.rootfs /host/root --web.listen-address 10.121.29.31:9100
 
 [root@ci32sjcmp021 ~]# ls -al /proc/9845/fd
 total 0
@@ -117,7 +118,7 @@ lrwxrwxrwx  1 root root    0 Feb 25 14:25 subsystem -> ../../../../bus/acpi
 
 网上说应该跟hwmon（`hwmon`即硬件监控(`Hardware monitor`)，它是用于检测设备状态的一类传感器设备接口，比如CPU温度、风扇转速、模数转换等）有关，看了下好像果然是
 
-这被认为是一个kernel bug，而一旦node exporter进入d状态（等待I/O，不可中断）后，所以啥也做不了。node exporter之所以做这样一个concurrent requests的限制，就是为了避免继续建立阻塞线程
+这被认为是一个kernel bug，而一旦node exporter进入D（uninterruptible sleep）状态（等待I/O，不可中断，处于uninterruptible sleep状态的进程通常是在等待IO，比如磁盘IO，网络IO，其他外设IO，如果进程正在等待的IO在较长的时间内都没有响应，那么就很会不幸地被 ps看到了，同时也就意味着很有可能有IO出了问题，可能是外设本身出了故障）后，所以啥也做不了。node exporter之所以做这样一个concurrent requests的限制，就是为了避免继续建立阻塞线程
 
 避免这个问题的方法可能是不启用hwmon
 
