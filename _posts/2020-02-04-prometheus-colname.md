@@ -73,3 +73,14 @@ up{datacenter="AMS01",deployment="ci22am",instance="ci22amcmp004.webex.com:9183"
 
 ![image-20200304155905453](/assets/images/image-20200304155905453.png)
 
+## 补全数据的小心机
+
+另加了一项Metrics，统计每个deployment的被disable的hypervisor个数，query之后发现，不是所有的deployment都有被disabled的，就查询不到数据，导致在界面显示的时候，就出现了不雅观的undefined
+
+![image-20200304191428291](/assets/images/image-20200304191428291.png)
+
+这个时候可以巧用一个正常情况value等于0的metrics来补全数据
+
+![image-20200304191550096](/assets/images/image-20200304191550096.png)
+
+因为nova_hypervisor_status{}正常应该为0，当前面一项不存在的时候，就会取后面的零值了
