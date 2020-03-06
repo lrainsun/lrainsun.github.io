@@ -122,6 +122,8 @@ lrwxrwxrwx  1 root root    0 Feb 25 14:25 subsystem -> ../../../../bus/acpi
 
 避免这个问题的方法可能是不启用hwmon
 
+在启动node-exporter的时候，加上如下参数`--no-collector.hwmon`
+
 # Reference
 
 [1] [https://www.kernel.org/doc/html/latest/hwmon/acpi_power_meter.html](https://www.kernel.org/doc/html/latest/hwmon/acpi_power_meter.html)
