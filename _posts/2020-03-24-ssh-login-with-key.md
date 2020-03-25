@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "ssh private key login失败"
-date:   2020-02-07 20:00:00 +0800
+date:   2020-03-24 20:00:00 +0800
 categories: Linux
 tags: Linux-Tool
 excerpt: ssh private key login失败
