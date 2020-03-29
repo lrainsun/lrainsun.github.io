@@ -14,67 +14,6 @@ mathjax: true
 
 这部分代码是在openvswitch kernel module里的，所以上次的patch就没有生效。
 
-# kernel module编译
-
-这就需要编译kernel module
-
-首先需要下载并安装对应版本的kernel-devel包（kernel-devel包只包含用于内核开发环境所需的内核头文件以及Makefile），比如我们要编译的版本是`3.10.0-957.12.2.el7`
-
-```shell
-wget http://repo1.xorcom.com/repos/centos/7/x86_64/Updates_OS_X86_64/Packages/k/kernel-devel-3.10.0-957.12.2.el7.x86_64.rpm
-rpm -ivh kernel-devel-3.10.0-957.12.2.el7.x86_64.rpm
-```
-
-解压后的代码会被放在这里
-
-```shell
-[root@rain-working-vm kernel]# cd /usr/src/kernels/3.10.0-957.12.2.el7.x86_64/
-arch/           crypto/         fs/             ipc/            lib/            mm/             samples/        sound/          usr/
-block/          drivers/        include/        Kconfig         Makefile        Module.symvers  scripts/        System.map      virt/
-.config         firmware/       init/           kernel/         Makefile.qlock  net/            security/       tools/          vmlinux.id
-```
-
-openvswitch相关在这里
-
-```shell
-[root@rain-working-vm 3.10.0-957.12.2.el7.x86_64]# ls -al net/openvswitch/
-total 12
-drwxr-xr-x.  2 root root   35 Mar 27 14:42 .
-drwxr-xr-x. 61 root root 4096 Mar 27 14:02 ..
--rw-r--r--.  1 root root 2295 May 14  2019 Kconfig
--rw-r--r--.  1 root root  446 May 14  2019 Makefile
-```
-
-可以拷贝这个文件夹到任意地方，并把openvswitch代码放到这里，就可以编译了
-
-```shell
-[root@rain-working-vm openvswitch]# cp /home/ocp/openvswitch-2.5.0-14/openvswitch-2.5.0/datapath/* .
-cp: omitting directory ‘/home/ocp/openvswitch-2.5.0-14/openvswitch-2.5.0/datapath/linux’
-[root@rain-working-vm openvswitch]# ls
-actions.c    conntrack.h  dp_notify.c  flow_netlink.c  flow_table.h  Makefile.am  README.md  vport-geneve.c  vport-internal_dev.c  vport-netdev.c  vport-vxlan.c
-compat.h     datapath.c   flow.c       flow_netlink.h  Kconfig       Makefile.in  vlan.h     vport-gre.c     vport-internal_dev.h  vport-netdev.h
-conntrack.c  datapath.h   flow.h       flow_table.c    Makefile      Modules.mk   vport.c    vport.h         vport-lisp.c          vport-stt.c
-```
-
- 此外，为了解决load module时的问题
-
-```shell
-[62972.099953] openvswitch: no symbol version for module_layout
-```
-
-还需要将如下文件（就在kernel-devel包里，拷贝到我们编译目录下）
-
-```shell
-[root@rain-working-vm openvswitch]# cp /usr/src/kernels/3.10.0-957.12.2.el7.x86_64/Module.symvers .
-```
-
-```shell
-[root@rain-working-vm 3.10.0-957.12.2.el7.x86_64]# make modules M=/root/openvswitch
-arch/x86/Makefile:166: *** CONFIG_RETPOLINE=y, but not supported by the compiler. Compiler update recommended..  Stop.
-```
-
-555，好像我的gcc版本太低，太晚了我困了，明天搞定再更新
-
 # 问题验证
 
 用了比较蠢的方法，我们通过往数据库表`ml2_vxlan_endpoints`里插入记录，来制造多hypervisor的情况
