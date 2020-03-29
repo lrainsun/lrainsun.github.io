@@ -6,6 +6,7 @@ categories: Openstack
 tags: Openstack-Neutron
 excerpt: OVS Flow action size超限制---续
 mathjax: true
+typora-root-url: ../
 ---
 
 # OVS Flow action size超限制问题又现

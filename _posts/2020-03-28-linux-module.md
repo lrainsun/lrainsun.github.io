@@ -6,6 +6,7 @@ categories: Openstack
 tags: Linux-Kernel
 excerpt: Linux Module
 mathjax: true
+typora-root-url: ../
 ---
 
 # Linux Module
