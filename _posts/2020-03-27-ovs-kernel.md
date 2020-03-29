@@ -24,7 +24,7 @@ insert into ml2_vxlan_endpoints (ip_address,udp_port,host) values ("192.168.0.50
 
 上一篇里面讲到到500多的时候会触发那个bug，我们就尝试复现一下这个问题，最终成功复现并且得到了准确的数据。
 
-在585个endpoint的时候（controller/network node, compute node），还不会触发这个问题
+在585个endpoint的时候（network node, compute node），还不会触发这个问题
 
 到586的时候，就已经超过限制。所以在没打patch之前，585是最大可支持的hypervisor数。
 
