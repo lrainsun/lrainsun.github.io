@@ -6,6 +6,7 @@ categories: Openstack
 tags: Linux-Kernel
 excerpt: Linux Kernel Downgrade
 mathjax: true
+typora-root-url: ../
 ---
 
 # Linux Kernel Downgrade
