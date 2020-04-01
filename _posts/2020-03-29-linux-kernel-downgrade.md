@@ -2,7 +2,7 @@
 layout: post
 title:  "Linux Kernel Downgrade"
 date:   2020-03-29 23:00:00 +0800
-categories: Openstack
+categories: Linux
 tags: Linux-Kernel
 excerpt: Linux Kernel Downgrade
 mathjax: true

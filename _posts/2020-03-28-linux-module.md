@@ -2,7 +2,7 @@
 layout: post
 title:  "Linux Module"
 date:   2020-03-28 23:00:00 +0800
-categories: Openstack
+categories: Linux
 tags: Linux-Kernel
 excerpt: Linux Module
 mathjax: true
