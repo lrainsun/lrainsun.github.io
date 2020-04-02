@@ -33,6 +33,7 @@ yum install -y python-pip ansible
 pip install --upgrade pip
 pip install -U ansible
 
+pip install pbr 
 cd /etc/yum.repos.d/
 wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 yum install docker-ce -y
@@ -70,6 +71,8 @@ sudo pip install --ignore-installed PyYAML
 cd kolla-ansible 
 git checkout stable/train
 python setup.py install
+yum -y install ansible
+pip install docker
 ```
 
 将globals.yml和passwords.yml复制到/etc/kolla目录
@@ -92,6 +95,7 @@ enable_memcached: "no"
 enable_rabbitmq: "{{ 'yes' if om_rpc_transport == 'rabbit' or om_notify_transport == 'rabbit' else 'no' }}"
 enable_ironic: "yes"
 enable_ironic_ipxe: "yes"
+kolla_internal_vip_address: "10.250.84.99"  //ip改成你的ip
 ```
 
 然后build deploy image，并拷贝到/etc/kolla/config/ironic下:
