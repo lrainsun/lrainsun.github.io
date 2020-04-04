@@ -73,6 +73,7 @@ git checkout stable/train
 python setup.py install
 yum -y install ansible
 pip install docker
+pip install --upgrade Jinja2
 ```
 
 将globals.yml和passwords.yml复制到/etc/kolla目录
@@ -229,4 +230,47 @@ rc文件
 export OS_AUTH_TYPE=none
 export OS_ENDPOINT=http://10.121.246.183:6385
 ```
+
+## ironic_inspector没起来
+
+`vim /etc/kolla/ironic-inspector/inspector.conf`
+
+```shell
+[pxe_filter]
+driver = dnsmasq
+```
+
+`docker restart ironic_inspector`
+
+## ironic_pxe没起来
+
+`vim /etc/kolla/ironic-pxe/config.json`
+
+```shell
+    "command": "/usr/sbin/in.tftpd --verbose --foreground --user root --address 0.0.0.0:69 --map-file /map-file /tftpboot", -->
+        "command": "/usr/sbin/in.tftpd -4 --verbose --foreground --user root --address 0.0.0.0:69 --map-file /map-file /tftpboot",
+```
+
+`docker restart ironic_pxe`
+
+## ironic_dnsmasq没起来
+
+```shell
+dnsmasq: bad dhcp-range at line 8 of /etc/dnsmasq.conf
+```
+
+只要配上valid的网段就可以
+
+```shell
+dhcp-range=10.225.22.6,10.225.22.14,255.255.255.0
+dhcp-sequential-ip
+
+dhcp-option=option:tftp-server,10.225.17.62
+dhcp-option=option:server-ip-address,10.225.17.62
+dhcp-option=210,/tftpboot/
+dhcp-option=3,10.225.22.1
+dhcp-option=option:bootfile-name,pxelinux.0
+```
+
+`docker restart ironic_dnsmasq`
 
