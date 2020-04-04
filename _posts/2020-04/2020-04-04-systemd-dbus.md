@@ -236,6 +236,7 @@ interface中有三部分：
 当使用python3的时候，可以使用`yum -y install python36-dbus`来安装python dbus库
 
 ```
+import dbus
 from dbus import SystemBus, SessionBus
 ```
 
@@ -277,9 +278,28 @@ enabled
 dbus.String('active', variant_level=1)
 ```
 
+# container内部
 
+如果我们要在container内部跑dbus来获取容器外的service，会报这样的错误
 
+```python
+>>> bus = dbus.SystemBus()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib64/python3.6/site-packages/dbus/_dbus.py", line 194, in __new__
+    private=private)
+  File "/usr/lib64/python3.6/site-packages/dbus/_dbus.py", line 100, in __new__
+    bus = BusConnection.__new__(subclass, bus_type, mainloop=mainloop)
+  File "/usr/lib64/python3.6/site-packages/dbus/bus.py", line 122, in __new__
+    bus = cls._new_for_bus(address_or_type, mainloop=mainloop)
+dbus.exceptions.DBusException: org.freedesktop.DBus.Error.FileNotFound: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory
+```
 
+起container的时候，需要把/run/dbus/system_bus_socket mount进去
+
+```shell
+docker run -itd --privileged -p 8084:8084 -v /root/distributed-ocp-exporter/config:/config -v /var/lib/nova/instances:/var/lib/nova/instances --name distributed_ocp_exporter -v=/run/dbus/system_bus_socket:/run/dbus/system_bus_socket -v=/proc:/host/proc:ro -v=/run/systemd:/run/systemd:ro registry-qa.webex.com/ocp/distributed-ocp-exporter:v1.0.0 --path.procfs=/host/proc --restart=always  --net host
+```
 
 # References
 
