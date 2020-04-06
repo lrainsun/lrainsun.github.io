@@ -237,7 +237,7 @@ interface中有三部分：
 
 ```
 import dbus
-from dbus import SystemBus, SessionBus
+from dbus import SystemBus, SessionBus, Interface
 ```
 
 Dbus有两类”channels“，一个是system serivce和system event，一个是login session
