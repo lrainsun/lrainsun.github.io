@@ -3,7 +3,7 @@ layout: post
 title:  "openstack standalone ironic环境搭建"
 date:   2020-01-07 23:00:00 +0800
 categories: Openstack
-tags: Openstack-ironic
+tags: Openstack-Ironic
 excerpt: standalone ironic环境搭建
 mathjax: true
 ---

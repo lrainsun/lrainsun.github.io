@@ -3,7 +3,7 @@ layout: post
 title:  "openstack standalone ironic Networking service"
 date:   2020-01-19 13:00:00 +0800
 categories: Openstack
-tags: Openstack-ironic
+tags: Openstack-Ironic
 excerpt: openstack standalone ironic Networking service
 mathjax: true
 ---

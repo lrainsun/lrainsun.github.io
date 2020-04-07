@@ -3,7 +3,7 @@ layout: post
 title:  "PXE & IPXE"
 date:   2020-01-08 17:00:00 +0800
 categories: Openstack
-tags: Openstack-ironic
+tags: Openstack-Ironic
 excerpt: PXE & IPXE
 mathjax: true
 ---

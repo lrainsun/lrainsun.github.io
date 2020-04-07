@@ -3,7 +3,7 @@ layout: post
 title:  "openstack standalone ironic部署baremetal node"
 date:   2020-01-21 17:00:00 +0800
 categories: Openstack
-tags: Openstack-ironic
+tags: Openstack-Ironic
 excerpt: openstack standalone ironic部署baremetal node
 mathjax: true
 ---

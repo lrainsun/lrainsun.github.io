@@ -3,7 +3,7 @@ layout: post
 title:  "openstack standalone ironic添加node及ironic状态机"
 date:   2020-01-13 23:00:00 +0800
 categories: Openstack
-tags: Openstack-ironic
+tags: Openstack-Ironic
 excerpt: standalone ironic环境增加node及ironic状态机
 mathjax: true
 ---
