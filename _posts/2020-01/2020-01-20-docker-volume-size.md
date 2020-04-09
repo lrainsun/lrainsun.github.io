@@ -1,5 +1,5 @@
 ---
-galayout: post
+layout: post
 title:  "docker volume大小的修改"
 date:   2020-01-20 18:00:00 +0800
 categories: Docker
