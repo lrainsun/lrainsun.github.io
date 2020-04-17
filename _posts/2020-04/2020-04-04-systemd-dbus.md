@@ -1,5 +1,5 @@
 ---
-layout: post
+raftlayout: post
 title:  "用python dbus跟systemd对话"
 date:   2020-04-04 23:00:00 +0800
 categories: Python
