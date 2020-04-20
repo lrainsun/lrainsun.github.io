@@ -2,8 +2,8 @@
 layout: post
 title:  "Airflow初体验"
 date:   2020-04-18 23:00:00 +0800
-categories: Linux
-tags: Linux-Service
+categories: Airflow
+tags: Airflow-Start
 excerpt: Airflow初体验
 mathjax: true
 typora-root-url: ../
