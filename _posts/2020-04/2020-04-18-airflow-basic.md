@@ -53,3 +53,10 @@ task的一次运行。task instance 有自己的状态，包括**"running", "suc
 DAGs中的不同Tasks之间可以有依赖关系，如 TaskA >> TaskB，表明TaskB依赖于TaskA
 
 ![image-20200418225615960](/../assets/images/image-20200418225615960.png)
+
+- DAG: The work (tasks), and the order in which work should take place (dependencies), written in Python.
+- DAG Run: An instance of a DAG for a particular logical date and time.
+- Operator: A class that acts as a template for carrying out some work.
+- Task: Defines work by implementing an operator, written in Python.
+- Task Instance: An instance of a task - that has been assigned to a DAG and has a state associated with a specific DAG run (i.e for a specific execution_date).
+- execution_date: The logical date and time for a DAG Run and its Task Instances.

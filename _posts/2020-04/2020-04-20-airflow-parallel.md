@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Airflow Executor"
-date:   2020-04-20 23:01:00 +0800
+date:   2020-04-20 23:00:00 +0800
 categories: Airflow
 tags: Airflow-Start
 excerpt: Airflow Executor
@@ -67,6 +67,26 @@ dag_concurrency = 16
 # The maximum number of active DAG runs per DAG
 max_active_runs_per_dag = 16
 ```
+
+# Pool
+
+Pool可以用来限制同一个Pool下的task并发数，可以在UI上`Menu -> Admin -> Pools`定义：
+
+在创建tasks（比如实例化Operators的时候）可以定义使用哪个pool，如果不定义，那么默认是在`default_pool`
+
+```python
+aggregate_db_message_job = BashOperator(
+    task_id='aggregate_db_message_job',
+    execution_timeout=timedelta(hours=3),
+    pool='ep_data_pipeline_db_msg_agg',
+    bash_command=aggregate_db_message_job_cmd,
+    dag=dag)
+aggregate_db_message_job.set_upstream(wait_for_empty_queue)
+```
+
+![image-20200421101940330](/../assets/images/image-20200421101940330.png)
+
+`Pool`定义可以联合`priority_weight`定义来定义queue中的优先级，用来决定哪个task先执行，默认的`priority_weight`是1。
 
 # References
 
