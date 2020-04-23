@@ -7,7 +7,6 @@ tags: Airflow-Start
 excerpt: Airflow安装
 mathjax: true
 typora-root-url: ../
-
 ---
 
 # Airflow开发环境安装
@@ -220,5 +219,6 @@ ___  ___ |  / _  /   _  __/ _  / / /_/ /_ |/ |/ /
 
 ```shell
 pip install cryptography
+pip install apache-airflow[crypto]
 ```
 
