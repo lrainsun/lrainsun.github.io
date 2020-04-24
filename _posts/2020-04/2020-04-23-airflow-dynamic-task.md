@@ -63,6 +63,8 @@ for i in range(int(Variable.get('MAX_NODE'))):
 
 ![image-20200423225759994](/../assets/images/image-20200423225759994.png)
 
+![image-20200424154637554](/../assets/images/image-20200424154637554.png)
+
 # References
 
 [1] [https://stackoverflow.com/questions/41517798/proper-way-to-create-dynamic-workflows-in-airflow](https://stackoverflow.com/questions/41517798/proper-way-to-create-dynamic-workflows-in-airflow)
