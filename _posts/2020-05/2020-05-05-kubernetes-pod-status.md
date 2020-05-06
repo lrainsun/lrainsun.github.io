@@ -6,7 +6,6 @@ categories: Kubernetes
 tags: Kubernetes-Pod
 excerpt: Kubernetes Pod的状态
 mathjax: true
-
 ---
 
 # Kubernetes Pod的状态
@@ -26,7 +25,7 @@ restartPolicy，配置了Pod 的恢复策略：
 
 ## pending
 
-Pending状态说明pod没有被调度到一个节点上，通常因为资源不足。可以describe一下
+Pending状态说明创建pod的请求已经被接受，但是pod没有被调度到一个节点上，通常因为资源不足。可以describe一下。
 
 ## waiting
 
