@@ -6,6 +6,7 @@ categories: Kubernetes
 tags: Kubernetes-Pod
 excerpt: Kubernetes Pod的状态
 mathjax: true
+typora-root-url: ../
 ---
 
 # Kubernetes Pod的状态

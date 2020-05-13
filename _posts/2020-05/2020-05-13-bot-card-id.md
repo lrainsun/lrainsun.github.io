@@ -6,6 +6,7 @@ categories: Teams
 tags: Teams-Bot
 excerpt: Webex Teams区分不同的Card
 mathjax: true
+typora-root-url: ../
 ---
 
 # Webex Teams区分不同的Card

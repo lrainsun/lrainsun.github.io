@@ -6,6 +6,7 @@ categories: Teams
 tags: Teams-Bot
 excerpt: Webex Teams Card初探
 mathjax: true
+typora-root-url: ../
 ---
 
 # Webex Teams Card初探

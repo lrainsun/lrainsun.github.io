@@ -6,6 +6,7 @@ categories: Teams
 tags: Teams-Bot
 excerpt: Webex Teams Webhook
 mathjax: true
+typora-root-url: ../
 ---
 
 # 配置Webhooks

@@ -6,6 +6,7 @@ categories: Teams
 tags: Teams-Bot
 excerpt: Webex Teams Bot入门
 mathjax: true
+typora-root-url: ../
 ---
 
 Run your own Webex Teams bot by taking a few steps:
