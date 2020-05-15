@@ -6,6 +6,7 @@ categories: Openstack
 tags: Openstack-Ironic
 excerpt: PXE & IPXE
 mathjax: true
+typora-root-url: ../
 ---
 
 # PXE & IPXE
@@ -37,7 +38,7 @@ PXE我们应该比较熟悉，用的比较多，而IPXE应该是PXE的扩展版
 
 Preboot Execution Environment (PXE): The PXE enables system’s BIOS and network interface card (NIC) to bootstrap a computer from the network in place of a disk. 由Intel开发，工作于client/server网络模式，支持工作站通过网络从远端服务器下载镜像，并由此进行网络启动和安装。
 
-![image-20200108154715599](../assets/images/image-20200108154715599.png)
+![image-20200108154715599](/../assets/images/image-20200108154715599.png)
 
 - 服务器发送dhcp请求
 - dhcp-server 响应dhcp请求，分配ip地址，并且返回next-server（tftp服务器地址）和filename（一般为pxelinux.0）

@@ -13,7 +13,7 @@ typora-root-url: ../
 
 Kubernetes监控是以prometheus项目为核心的一套统一的方案。
 
-![架构](/assets/images/prometheus-architecture.png)
+![架构](/../assets/images/prometheus-architecture.png)
 
 Prometheus 由多个组件组成：
 
@@ -54,7 +54,7 @@ Prometheus 直接接收或者通过中间的 Pushgateway 网关被动获取指�
 * kubernetes里pod因为调度的原因导致pod的ip会发生变化
 * prometheus server, alertmanager的高可用，prometheus可以通过服务发现的形式来自动监控集群
 
-![promtheus opeator](/assets/images/prometheus-operator.png)
+![promtheus opeator](/../assets/images/prometheus-operator.png)
 
 Operator的关键是CRD（自定义资源）的设计，prometheus-operator里定义了5个CRD：
 
@@ -436,3 +436,4 @@ prometheus   LoadBalancer   10.100.96.144   10.225.28.229   9091:32412/TCP   54m
 ```
 
 ![image-20191128174751872](/assets/images/image-20191128174751872.png)
+

@@ -59,13 +59,13 @@ Ingress控制器可以由任何具有反向代理功能的服务程序实现，I
 
 1. 使用专用的Service对象为Ingress控制器接入外部流量
 
-![image-20191110230414166](/assets/images/image-20191110230414166.png)
+![image-20191110230414166](/../assets/images/image-20191110230414166.png)
 
 以Deployment控制器管理Ingress控制器的Pod资源，并通过nodeport或loadbalancer类型的service对象为其接入集群外部的请求流量，这就意味着，定义一个ingress控制器的时候，必须在其前端定义一个专用的service对象
 
 2. 以hostport或者hostnetwork的方式为Ingress控制器接入外部流量
 
-![image-20191110230815672](/assets/images/image-20191110230815672.png)
+![image-20191110230815672](/../assets/images/image-20191110230815672.png)
 
 借助于DaemonSet控制器，将Ingress控制器的Pod资源各自以单一实例的方式运行与集群的所有或者部分工作节点上，并配置这类Pod对象以hostport或者hostnetwork的方式在当前节点接入外部流量
 

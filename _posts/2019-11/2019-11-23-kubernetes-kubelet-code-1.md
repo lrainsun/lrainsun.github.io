@@ -228,7 +228,7 @@ func startKubelet(k kubelet.Bootstrap, podCfg *config.PodConfig, kubeCfg *kubele
 
 *k8s.io/kubernetes/pkg/kubelet/kubelet.go* Run 启动kubelet
 
-![image-20191123164825529](/assets/images/image-20191123164825529.png)
+![image-20191123164825529](/../assets/images/image-20191123164825529.png)
 
 ```go
 // Run starts the kubelet reacting to config updates
@@ -594,7 +594,7 @@ func newPodWorkers(syncPodFn syncPodFnType, recorder record.EventRecorder, workQ
 
 syncPodFn -> klet.syncPod，*k8s.io/kubernetes/pkg/kubelet/kubelet.go* SyncPod
 
-![image-20191123202159859](/assets/images/image-20191123202159859.png)
+![image-20191123202159859](/../assets/images/image-20191123202159859.png)
 
 syncPod里会generateAPIPodStatus，做一些检查，设置pod状态，创建cgroups，创建data目录，等待volume mount，最后会调用containerRuntime.SyncPod（*k8s.io/kubernetes/pkg/kubelet/kuberuntime/kuberuntime_manager.go* ）
 

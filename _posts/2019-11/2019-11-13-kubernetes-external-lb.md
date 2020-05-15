@@ -11,7 +11,7 @@ typora-root-url: ../
 
 # External LB
 
-![image-20191110230414166](/assets/images/image-20191110230414166.png)
+![image-20191110230414166](/../assets/images/image-20191110230414166.png)
 
 昨天看的Ingress里，还缺个externalLB，类型为 `LoadBalancer` 的服务在 Kubernetes 中并没有直接支持，其中Metallb是一个解决方案。
 

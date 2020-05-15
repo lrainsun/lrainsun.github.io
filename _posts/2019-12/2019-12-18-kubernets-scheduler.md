@@ -25,7 +25,7 @@ typora-root-url: ../
 
 # 工作原理
 
-![image-20191218214454042](/assets/images/image-20191218214454042.png)
+![image-20191218214454042](/../assets/images/image-20191218214454042.png)
 
 从图中可以看出，Kubernetes 的调度器的核心，实际上是两个相互独立的控制循环。
 
@@ -62,4 +62,4 @@ Assume 之后，调度器才会创建一个 Goroutine 来异步地向 APIServer 
 
 默认调度期的可扩展性：采用go plugin机制，每一个绿色的箭头都是一个可以插入自定义逻辑的接口
 
-![image-20191218221320395](/assets/images/image-20191218221320395.png)
+![image-20191218221320395](/../assets/images/image-20191218221320395.png)

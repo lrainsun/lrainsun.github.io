@@ -15,7 +15,7 @@ kubernetes在调度好之后，最终将pod在宿主机上创建出来，并把�
 
 ## kubelet工作原理
 
-![image-20191117173502863](/assets/images/image-20191117173502863.png)
+![image-20191117173502863](/../assets/images/image-20191117173502863.png)
 
 kubelet 本身，也是按照“控制器”模式来工作的。
 
@@ -49,7 +49,7 @@ CRI的主要组件，Protocol Buffers API包含两个gRPC服务：
 
 docker & rkt都可以使用一个socket同时提供这两个服务，在kubelet中可以用--container-runtime-endpoint和--image-service-endpoint设置这个socket。
 
-![image-20191117174320572](/assets/images/image-20191117174320572.png)
+![image-20191117174320572](/../assets/images/image-20191117174320572.png)
 
 ## Pod和容器生命周期的管理
 

@@ -55,7 +55,7 @@ Pod有个PodStatus对象，其中包含一个 [PodCondition](https://kubernetes.
 
 ## Pod的创建流程
 
-![image-20191030211642133](/assets/images/image-20191030211642133.png)
+![image-20191030211642133](/../assets/images/image-20191030211642133.png)
 
 1. 用户通过kubectl或者其他API客户端提交Pod Spec给API Server
 2. API Server尝试着将Pod对象的相关信息存入ETCD，待写入操作执行完成，API Server即会返回确认信息至客户端
@@ -70,7 +70,7 @@ Pod有个PodStatus对象，其中包含一个 [PodCondition](https://kubernetes.
 
 ## Pod的终止过程
 
-![image-20191030211707070](/assets/images/image-20191030211707070.png)
+![image-20191030211707070](/../assets/images/image-20191030211707070.png)
 
 1. 用户发送删除Pod对象的命令
 2. API Server中的对象会随着时间的推移而更新，在前面说过的grace period （默认30s），Pod被视为”dead"

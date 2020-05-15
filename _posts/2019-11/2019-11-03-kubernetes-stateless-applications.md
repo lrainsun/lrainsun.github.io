@@ -21,7 +21,7 @@ Deployment通过使用ReplicaSets，实现了这样一些功能：
 4. 暂停和启动：对于每一次升级，都能够随时暂停和启动
 5. 多种自动更新方案：一是Recreate，即重建更新机制，全面停止、删除旧有的Pod后用新版替代；另一种是RollingUpdaet，即滚动升级机制，逐步替换旧有的Pod至新的版本
 
-![这里写图片描述](/assets/images/99adaa8e91b0a0e7c485ecdf156e77b5.png)
+![这里写图片描述](/../assets/images/99adaa8e91b0a0e7c485ecdf156e77b5.png)
 
 replicaset通过"控制器模式"，保证系统中Pod的个数永远等于指定的个数
 

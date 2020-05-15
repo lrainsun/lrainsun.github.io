@@ -15,7 +15,7 @@ typora-root-url: ../
 
 先跳出来，复习一下，从整体框架看一下kubernetes，也了解究竟还有多少东西一点没看，多少东西值得再深入看。btw，纯拷贝，好在并不完全是无脑拷贝。
 
-![Kubernetes架构](/assets/images/architecture.png)
+![Kubernetes架构](/../assets/images/architecture.png)
 
 Kubernetes主要由以下几个核心组件组成：
 
@@ -37,17 +37,17 @@ Kubernetes主要由以下几个核心组件组成：
 
 ## Master架构
 
-![Kubernetes master架构示意图](/assets/images/kubernetes-master-arch.png)
+![Kubernetes master架构示意图](/../assets/images/kubernetes-master-arch.png)
 
 ## Node架构
 
-![kubernetes node架构示意图](/assets/images/kubernetes-node-arch.png)
+![kubernetes node架构示意图](/../assets/images/kubernetes-node-arch.png)
 
 其中有两个组件是比较重要，基本上不要想去替代的，一个是apiservice，一个是kubelet
 
 # 分层架构
 
-![Kubernetes分层架构示意图](/assets/images/kubernetes-layers-arch.png)
+![Kubernetes分层架构示意图](/../assets/images/kubernetes-layers-arch.png)
 
 - 核心层：Kubernetes最核心的功能，对外提供API构建高层的应用，对内提供插件式应用执行环境
 - 应用层：部署（无状态应用、有状态应用、批处理任务、集群应用等）和路由（服务发现、DNS解析等）、Service Mesh（部分位于应用层）
@@ -59,7 +59,7 @@ Kubernetes主要由以下几个核心组件组成：
 
 # 组件间通信
 
-![Kuberentes架构（图片来自于网络）](/assets/images/kubernetes-high-level-component-archtecture.jpg)
+![Kuberentes架构（图片来自于网络）](/../assets/images/kubernetes-high-level-component-archtecture.jpg)
 
 这里少了CSI（Container Storage Interface）
 

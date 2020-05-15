@@ -106,7 +106,7 @@ hostnames-5db5477647-8ggkg
 hostnames-5db5477647-zlg5h
 ```
 
-![image-20191106162226943](/assets/images/image-20191106162226943.png)
+![image-20191106162226943](/../assets/images/image-20191106162226943.png)
 
 Service对象的IP地址称为Cluster IP，它位于kubernetes cluster配置指定的专用IP地址范围之内（启动api-server时--service-cluster-ip-range=10.96.0.0/12），而且是一种虚拟IP地址，在service对象创建后即保持不变，能够被同一集群中的Pod资源所访问。Service端口接收客户端请求并转发到后端的Pod中应用的相应端口上，这种代理机制也称为port proxy，或者四层代理，工作与TCP/IP协议栈的传输层。
 
@@ -172,7 +172,7 @@ KUBE-SVC-ODX2UBAZM7RQWOIU是一组规则，是一组随机模式的（-mode rand
 
 这三条链都是DNAT规则，DNAT 规则的作用，就是在 PREROUTING 检查点之前，也就是在路由之前，将流入 IP 包的目的地址和端口，改成–to-destination 所指定的新的目的地址和端口。这个目的地址和端口，正是被代理 Pod 的 IP 地址和端口。
 
-![image-20191106163637088](/assets/images/image-20191106163637088.png)
+![image-20191106163637088](/../assets/images/image-20191106163637088.png)
 
 而这些规则的产生，是kube-proxy通过监听Pod的变化事件，在宿主机上生成并维护的。
 

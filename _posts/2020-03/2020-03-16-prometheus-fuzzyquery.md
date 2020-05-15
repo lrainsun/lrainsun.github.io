@@ -21,17 +21,17 @@ grafana dashboard真的是很需要耐心。。。眼神一飘，数据搞不好
 
 比如通过这样一个query，可以取到所有的datacenter数据
 
-![image-20200316195518843](/assets/images/image-20200316195518843.png)
+![image-20200316195518843](/../assets/images/image-20200316195518843.png)
 
 在其他地方就可以用`$datacenter`来使用
 
 定义好之后，还可以在Preview的地方预览一下，数据对不对
 
-![image-20200316195655233](/assets/images/image-20200316195655233.png)
+![image-20200316195655233](/../assets/images/image-20200316195655233.png)
 
 想要关联起来的话，就可以这样定义
 
-![image-20200316195731079](/assets/images/image-20200316195731079.png)
+![image-20200316195731079](/../assets/images/image-20200316195731079.png)
 
 当你选中datacenter之后，就只有这个datacenter的所有deployment type被列出来
 
@@ -39,13 +39,13 @@ grafana dashboard真的是很需要耐心。。。眼神一飘，数据搞不好
 
 可为啥，我们刚刚定义了之后，选择了datacenter，deployment type这里却是none呢？
 
-![image-20200316195905711](/assets/images/image-20200316195905711.png)
+![image-20200316195905711](/../assets/images/image-20200316195905711.png)
 
 因为我们查询的时候没有用模糊查询，所以当选择两个datacenter的时候，就变成查询`datacenter="AMS01|DFW02"`了， 这样是没有结果的，因为没有一个datacenter的名字是`“AMS01|DFW02"`
 
 需要`datacenter=~"AMS01|DFW02"`
 
-![image-20200316200150301](/assets/images/image-20200316200150301.png)
+![image-20200316200150301](/../assets/images/image-20200316200150301.png)
 
 `=~'` 和`!~`表示支持正则表达式的查询
 

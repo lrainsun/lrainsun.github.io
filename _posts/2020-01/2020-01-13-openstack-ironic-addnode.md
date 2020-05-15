@@ -6,6 +6,7 @@ categories: Openstack
 tags: Openstack-Ironic
 excerpt: standalone ironic环境增加node及ironic状态机
 mathjax: true
+typora-root-url: ../
 ---
 
 # node create
@@ -55,7 +56,7 @@ manage, provide
 
 # state machine
 
-![Ironic state transitions](../assets/images/states.svg)
+![Ironic state transitions](/../assets/images/states.svg)
 
 ## enroll
 

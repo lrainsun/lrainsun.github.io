@@ -11,7 +11,7 @@ typora-root-url: ../
 
 # Indexer & Local Store基本概念
 
-![image-20191125085228713](/assets/images/image-20191125085228713.png)
+![image-20191125085228713](/../assets/images/image-20191125085228713.png)
 
 依然是这张图，Indexer & Local Store的位置在红色框起来的部分。
 

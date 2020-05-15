@@ -43,7 +43,7 @@ recirc_id(0),in_port(8),eth(src=fa:16:3e:37:d9:88,dst=ff:ff:ff:ff:ff:ff),eth_typ
 
 查了一下，发现是这样
 
-![img](../assets/images/635909-20180425225800050-1293753570.jpg)
+![img](/../assets/images/635909-20180425225800050-1293753570.jpg)
 
 OVS是内核态和用户态配合工作的，需要加载内核态模块Openvswitch.ko。
 

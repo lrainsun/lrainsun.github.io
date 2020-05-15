@@ -397,7 +397,7 @@ func Run(c *config.CompletedConfig, stopCh <-chan struct{}) error {
 
 # Controller
 
-![image-20191127112249873](/assets/images/image-20191127112249873.png)
+![image-20191127112249873](/../assets/images/image-20191127112249873.png)
 
 这个图展示了好多遍了。。但是所有的controller起来之后，基本上都是按照这个图来运作的
 

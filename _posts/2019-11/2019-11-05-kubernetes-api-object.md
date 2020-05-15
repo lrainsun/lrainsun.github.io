@@ -36,7 +36,7 @@ Declarative是一种设计理念，是一种工作模式，透传出来的是“
 
 通过这样的结构，整个Kubernetes里的所有API对象，可以用如下的树形结构表示出来
 
-![img](/assets/images/709700eea03075bed35c25b5b6cdefda.png)
+![img](/../assets/images/709700eea03075bed35c25b5b6cdefda.png)
 
 kubernetes找到一个API对象的过程如下：
 
@@ -58,7 +58,7 @@ kubernetes找到一个API对象的过程如下：
 
 以CronJob为例
 
-![img](/assets/images/df6f1dda45e9a353a051d06c48f0286f.png)
+![img](/../assets/images/df6f1dda45e9a353a051d06c48f0286f.png)
 
 1. 发起创建CronJob的API请求之后，编写的YAML信息就被发给了APIServer
 2. APIServer会过滤这个请求，并完成一些前置性的工作，比如授权、超时处理、审计等。

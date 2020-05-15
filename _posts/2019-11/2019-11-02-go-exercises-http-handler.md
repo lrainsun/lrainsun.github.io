@@ -72,9 +72,9 @@ func main() {
 
 运行结果：
 
-![image-20191102171849474](/assets/images/image-20191102171849474.png)
+![image-20191102171849474](/../assets/images/image-20191102171849474.png)
 
-![image-20191102171927438](/assets/images/image-20191102171927438.png)
+![image-20191102171927438](/../assets/images/image-20191102171927438.png)
 
 ## Web 服务器
 

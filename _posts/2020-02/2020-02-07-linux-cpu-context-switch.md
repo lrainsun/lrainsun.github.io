@@ -161,7 +161,7 @@ Linux 3.10.0-693.11.1.el7.x86_64 (rain-kubernetes-1.localdomain) 	02/07/2020 	_x
 [root@rain-kubernetes-1 ~]# watch -d cat /proc/interrupts
 ```
 
-![image-20200207195123599](/assets/images/image-20200207195123599.png)
+![image-20200207195123599](/../assets/images/image-20200207195123599.png)
 
 变化速度最快的是重调度中断（RES，rescheduling interrupts），这个中断类型表示，唤醒空闲状态的 CPU 来调度新的任务运行。所以，这里的中断升高还是因为过多任务的调度问题，跟前面上下文切换次数的分析结果是一致的。
 

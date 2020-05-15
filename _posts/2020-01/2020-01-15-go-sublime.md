@@ -25,7 +25,7 @@ goland木有license了，之前的license过期了。。老板的经费还木有
 
 然后browse packages会打开packages所在文件夹，点到Installed Packages，把刚刚下载的文件拷贝进去，然后重启sublime
 
-![image-20200115152903444](/assets/images/image-20200115152903444.png)
+![image-20200115152903444](/../assets/images/image-20200115152903444.png)
 
 # Go build
 
@@ -334,7 +334,7 @@ IndexError: list index out of range
 
 说明文件夹里内容太多了，可以选一个小一点的文件夹，如果成功会在目录下成功两个文件，然后就可以实现跳转啦
 
-![image-20200115163830251](/assets/images/image-20200115163830251.png)
+![image-20200115163830251](/../assets/images/image-20200115163830251.png)
 
 # run
 

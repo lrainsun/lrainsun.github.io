@@ -17,11 +17,11 @@ typora-root-url: ../
 
 反之如果不是instant，这里就是一个取值的range，随着右上角的变化，整个图会变
 
-![image-20200229231207761](/assets/images/image-20200229231207761.png)
+![image-20200229231207761](/../assets/images/image-20200229231207761.png)
 
 那么中间这个值哪来的呢？
 
-![image-20200229231320055](/assets/images/image-20200229231320055.png)
+![image-20200229231320055](/../assets/images/image-20200229231320055.png)
 
 设置中有个stat，这里设置的是average，也就是会把time range内的采样值求平均
 

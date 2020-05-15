@@ -13,7 +13,7 @@ typora-root-url: ../
 
 kube-controller-manager的实现是依赖于client-go的，之前学习的controller的实现都是基于client-go
 
-![img](/assets/images/1.png)
+![img](/../assets/images/1.png)
 
 图中的组件分为client-go和custom controller两部分：
 
@@ -32,7 +32,7 @@ kube-controller-manager的实现是依赖于client-go的，之前学习的contro
 
 仿照kube-controller-manager去写controller是一个思路，或者，有一个工具kubebuilder，它将这些controller的逻辑封装和抽象成了公共的库（controller-runtime）和公共的工具（controller-tools），可以帮助我们自动生成scaffold的代码来初始化crd，封装底层的go-client
 
-![image-20191202134442946](/assets/images/image-20191202134442946.png)
+![image-20191202134442946](/../assets/images/image-20191202134442946.png)
 
 ## Clients/Cache
 

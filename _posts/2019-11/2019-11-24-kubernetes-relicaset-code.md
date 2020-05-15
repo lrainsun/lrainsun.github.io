@@ -367,7 +367,7 @@ func NewBaseController(rsInformer appsinformers.ReplicaSetInformer, podInformer 
 
 * 通过 goroutine 启动一个（或者并发启动多个，根据ConcurrentRSSyncs的定义，决定启动多少worker）“无限循环”的任务，这无限循环里的任务，就是真正的业务逻辑。后面的处理其实就是红色部分的内容。
 
-  ![image-20191124225004461](/assets/images/image-20191124225004461.png)
+  ![image-20191124225004461](/../assets/images/image-20191124225004461.png)
 
 ```go
 // worker runs a worker thread that just dequeues items, processes them, and marks them done.

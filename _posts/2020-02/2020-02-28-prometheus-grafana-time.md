@@ -20,15 +20,15 @@ typora-root-url: ../
 
 但是我怎么让这个时间控制在上个星期呢？
 
-![image-20200228215559422](/assets/images/image-20200228215559422.png)
+![image-20200228215559422](/../assets/images/image-20200228215559422.png)
 
 这边点一下prometheus，可以跳转到Prometheus查看时间
 
-![image-20200228215731955](/assets/images/image-20200228215731955.png)
+![image-20200228215731955](/../assets/images/image-20200228215731955.png)
 
 而这时候grafana右上角的time range是
 
-![image-20200228215804076](/assets/images/image-20200228215804076.png)
+![image-20200228215804076](/../assets/images/image-20200228215804076.png)
 
 时区关系，实际，`sum by (deployment) (sum by (deployment, hypervisor_hostname) (nova_servers{job="openstack_exporter"}))`是取了Time Range的From -> To中的`To`的时间
 
@@ -38,7 +38,7 @@ typora-root-url: ../
 
 另外，想要实现下面这样，一个表格中多个metrics，需要用到Boom Table，这个插件默认是不启用的，
 
-![image-20200228220036385](/assets/images/image-20200228220036385.png)
+![image-20200228220036385](/../assets/images/image-20200228220036385.png)
 
 安装方法是
 
@@ -50,11 +50,11 @@ grafana-cli plugins install yesoreyeram-boomtable-panel
 
 然后可以配置多个Metrics，每个Metrics的value值都可以被显示出来
 
-![image-20200228220228129](/assets/images/image-20200228220228129.png)
+![image-20200228220228129](/../assets/images/image-20200228220228129.png)
 
 需要定义不同的Pattern匹配
 
-![image-20200228220324157](/assets/images/image-20200228220324157.png)
+![image-20200228220324157](/../assets/images/image-20200228220324157.png)
 
 上面定义的Legend对应到Pattern和Col Name。比如这样一个Lagend `prod.server.my-app-01.sys.cpu.usage`
 

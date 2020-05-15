@@ -47,7 +47,7 @@ cookie=0x92889808aecb4eb0, duration=249122.108s, table=22, n_packets=0, n_bytes=
 
 这个有个bug
 
-![image-20200317223745891](../assets/images/image-20200317223745891.png)
+![image-20200317223745891](/../assets/images/image-20200317223745891.png)
 
 红色部分的size是转换之前按ntattr原始长度计算的，按原始长度来算的话，只能支持到（32 * 1024）/ 60 = 546.13，而我们环境hypervisor有579台，所以原来我们在这边就返回错误了。
 

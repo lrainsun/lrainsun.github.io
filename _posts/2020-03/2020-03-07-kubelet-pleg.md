@@ -17,7 +17,7 @@ The PLEG module in kubelet (Kubernetes) adjusts the container runtime state with
 
 PLEG维护了一个缓存，缓存中记录了Pod的信息，通过记录的Pod信息，识别出Pod生命周期中的各种事件，如容器的启动、终止等，从runtime获取containers/sandboxes的信息，并根据前后两次信息对比，生成对应的PodLifecycleEvent，通过eventChannel发送到kubelet syncLoop进行消费，最终由kubelet syncPod完成Pod的同步。
 
-![img](/assets/images/orig-pleg-1.png)
+![img](/../assets/images/orig-pleg-1.png)
 
 PLEG会随着kubelet启动，其实是启动一个goroutine，每个relistPeriod(plegRelistPeriod = time.Second * 1，1s)就调用一次relist，根据最新的PodStatus生成PodLiftCycleEvent。
 

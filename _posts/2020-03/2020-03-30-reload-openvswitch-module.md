@@ -29,4 +29,4 @@ typora-root-url: ../
 
 最宝贵的东西也不仅仅是现在拥有，回忆和习惯亦很宝贵，旧的人旧的事皆很宝贵，嗯，我是个念旧的人。
 
-![小丸子伤心图片](/assets/images/hplgghpocv.jpeg)
+![小丸子伤心图片](/../assets/images/hplgghpocv.jpeg)

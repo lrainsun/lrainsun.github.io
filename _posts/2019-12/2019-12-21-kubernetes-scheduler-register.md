@@ -13,11 +13,11 @@ typora-root-url: ../
 
 调度算法的注册在kubernetes/pkg/scheduler/algorithmprovider下
 
-![image-20191221112338177](/assets/images/image-20191221112338177.png)
+![image-20191221112338177](/../assets/images/image-20191221112338177.png)
 
 而具体的算法定义在kubernetes/pkg/scheduler/algorithm下，predicates跟priorities的算法都在这下面
 
-![image-20191221112401876](/assets/images/image-20191221112401876.png)
+![image-20191221112401876](/../assets/images/image-20191221112401876.png)
 
 # ApplyFeatureGates
 

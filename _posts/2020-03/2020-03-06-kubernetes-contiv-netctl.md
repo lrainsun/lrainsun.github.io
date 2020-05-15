@@ -11,7 +11,7 @@ typora-root-url: ../
 
 # contiv-netctl
 
-![Contiv-netctl](/assets/images/contiv-netctl-arch.png)
+![Contiv-netctl](/../assets/images/contiv-netctl-arch.png)
 
 contiv-netctl是一个可以用来查询contiv-VPP的工具，在安装contiv-VPP CNI插件的时候它默认被安装在k8s的master节点上
 

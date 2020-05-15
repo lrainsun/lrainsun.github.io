@@ -11,7 +11,7 @@ typora-root-url: ../
 
 I have a strong desire to review "Friends" tonight. 
 
-![img](/assets/images/thumb.jpg)
+![img](/../assets/images/thumb.jpg)
 
 # I'll be There for You
 
@@ -35,4 +35,4 @@ I'll be there for you,
 
 'cause you're there for me too.
 
-![img](/assets/images/170031.43540581_1000X1000.jpg)
+![img](/../assets/images/170031.43540581_1000X1000.jpg)

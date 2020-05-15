@@ -20,7 +20,7 @@ typora-root-url: ../
 
 有个环境一直在告警，就想看看是怎么回事
 
-![image-20200214143521855](/assets/images/image-20200214143521855.png)
+![image-20200214143521855](/../assets/images/image-20200214143521855.png)
 
 backend session limit是1639，而current session一直维持在1886，不会有问题吗？
 

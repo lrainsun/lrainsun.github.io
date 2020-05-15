@@ -184,7 +184,7 @@ func (s *sharedIndexInformer) Run(stopCh <-chan struct{}) {
 
   shared informer 是一堆informer的集合，每一类资源在一个客户端下只会有一个informer，如果其他的controller关注对应的资源，就注册一个对应的处理函数，当事件发生的时候，由shared informer统一进行事件的分发处理
 
-  ![image-20191127204243909](/assets/images/image-20191127204243909.png)
+  ![image-20191127204243909](/../assets/images/image-20191127204243909.png)
 
   *   ```
       func (p *sharedProcessor) distribute(obj interface{}, sync bool) {
@@ -328,7 +328,7 @@ func (s *sharedIndexInformer) Run(stopCh <-chan struct{}) {
     pendingNotifications buffer.RingGrowing
     ```
 
-    ![image-20191127204454188](/assets/images/image-20191127204454188.png)
+    ![image-20191127204454188](/../assets/images/image-20191127204454188.png)
 
   nextCh是当前listener内部事件通道，而addCh负责接收sharedProessor传递进来的事件通知，pendingNotifications是内部缓冲队列。这样做的目的是在distribute的时候尽可能减少阻塞。
 
