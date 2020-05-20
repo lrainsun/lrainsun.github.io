@@ -40,6 +40,42 @@ alertmanager本身有一个默认的模板，发alert邮件的时候，如果告
         prom/alertmanager:v0.20.0 --config.file=/etc/alertmanager/alertmanager.yml --web.external-url=http://10.225.28.176:9093
 ```
 
+# GeneratorURL
+
+还有一个可以链接到prometheus的link，用到的是`{{ .GeneratorURL }}`
+
+![image-20200519111911164](/../assets/images/image-20200519111911164.png)
+
+比如这里的source是可以链接到prometheus的
+
+而上面的external url如果不配，默认是alertmanager的hostname
+
+GeneratorURL默认是prometheus的hostname
+
+而因为我们都跑在docker里，所以hostname默认是一个字符串
+
+可以这样配
+
+```shell
+docker run -itd \
+        -p 9090:9090 \
+        -v /root/ocp-monitoring/prometheus.yml:/etc/prometheus/prometheus.yml \
+        -v /root/ocp-monitoring/rules/record.rules:/etc/prometheus/record.rules \
+        -v /root/ocp-monitoring/rules/ocp_rule.rules:/etc/prometheus/ocp_rule.rules \
+        -v /root/ocp-monitoring/rules/haproxy_rule.rules:/etc/prometheus/haproxy_rule.rules \
+        -v /root/ocp-monitoring/rules/memcached_rule.rules:/etc/prometheus/memcached_rule.rules \
+        -v /root/ocp-monitoring/rules/mysql_rule.rules:/etc/prometheus/mysql_rule.rules \
+        -v /root/ocp-monitoring/rules/rabbitmq_rule.rules:/etc/prometheus/rabbitmq_rule.rules \
+        -v /root/ocp-monitoring/rules/node_rule.rules:/etc/prometheus/node_rule.rules \
+        -v /root/ocp-monitoring/rules/libvirt_rule.rules:/etc/prometheus/libvirt_rule.rules \
+        -v /data:/prometheus \
+        --restart=always \
+        --name $NAME \
+        prom/prometheus:v2.15.2 --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --storage.tsdb.retention.time=90d --web.external-url=http://10.225.28.176:9090
+```
+
+也是`--web.external-url=http://10.225.28.176:9090`只不过是在prometheus里
+
 # go template中的multi condition
 
 然后因为表格太长了，为了看起来方便，我把所有的label都打印出来放在表格里
