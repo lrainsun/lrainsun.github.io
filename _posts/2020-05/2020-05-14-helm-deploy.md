@@ -1,13 +1,6 @@
----
-layout: post
-title:  "helm3部署应用"
-date:   2020-05-14 23:00:00 +0800
-categories: Kubernetes
-tags: Kubernetes-Deploy
-excerpt: helm3部署应用
-mathjax: true
-typora-root-url: ../
----
+
+
+
 
 # 编译docker image
 
@@ -111,5 +104,11 @@ helm search repo autojob
 ```shell
 helm install -f autojob-conf/autojob.yaml --debug autojob-bot oke/autojob -n autojob-bot
 helm list -n autojob-bot
+```
+
+升级
+
+```shell
+helm upgrade -f autojob-conf/autojob.yaml --debug autojob-bot oke/autojob -n autojob-bot
 ```
 
