@@ -1,19 +1,17 @@
 ---
 layout: post
-title:  "Ansible Python API初探"
-date:   2020-05-28 23:00:00 +0800
+title:  "Ansible Python API run playbook"
+date:   2020-05-29 23:00:00 +0800
 categories: Airflow
 tags: Airflow-Tutorial
-excerpt: Ansible API初探
+excerpt: Ansible Python API run playbook
 mathjax: true
 typora-root-url: ../
 ---
 
-# Ansible Python API初探
+# Ansible Python API run playbook
 
-ansible在跑完playbook之后，我们要怎么知道，多少host成功，多少失败了呢？想要把run ansible的动作放到airflow上做自动化处理的话，获取运行结果这个就很必要了。
-
-今天看了一下ansible api，做了一个小小的尝试。
+昨天试了通过ansible python api去run一个module，今天尝试了run playbook
 
 ```python
 from ansible import constants
@@ -25,9 +23,11 @@ from ansible.playbook.play import Play
 from ansible.executor.task_queue_manager import TaskQueueManager
 from ansible.executor.playbook_executor import PlaybookExecutor
 from ansible.plugins.callback import CallbackBase
+from ansible.plugins.callback.default import CallbackModule
 from ansible.inventory.manager import InventoryManager
 from ansible.vars.manager import VariableManager
 import json
+
 
 class ModelResultsCollector(CallbackBase):
     def __init__(self, *args, **kwargs):
@@ -59,15 +59,19 @@ class PlayBookResultsCollector(CallbackBase):
 
     def v2_runner_on_ok(self, result, *args, **kwargs):
         self.task_ok[result._host.get_name()] = result
+        print(result.__dict__)
 
     def v2_runner_on_failed(self, result, *args, **kwargs):
         self.task_failed[result._host.get_name()] = result
+        print(result.__dict__)
 
     def v2_runner_on_unreachable(self, result):
         self.task_unreachable[result._host.get_name()] = result
+        print(result.__dict__)
 
     def v2_runner_on_skipped(self, result):
         self.task_ok[result._host.get_name()] = result
+        print(result.__dict__)
 
     def v2_playbook_on_stats(self, stats):
         hosts = sorted(stats.processed.keys())
@@ -87,23 +91,26 @@ class AnsibleRunner(object):
     This is a General object for parallel execute modules.
     """
 
-    def __init__(self, ips=None, *args, **kwargs):
-        self.ips = ips
+    def __init__(self, hosts=None, module_path='', inventory='', ssh_pass='', *args, **kwargs):
+        self.hosts = hosts
         self.inventory = None
         self.variable_manager = None
         self.loader = None
-        self.options = None
-        self.passwords = None
+        self.inventory = inventory
+        self.ssh_pass = ssh_pass
         self.callback = None
+        self.module_path = module_path
         self.__initializeData()
         self.results_raw = {}
 
     def __initializeData(self):
-        context.CLIARGS = ImmutableDict(connection='smart', module_path=['/mymodules'], forks=10, become=None, become_method=None, become_user=None, check=False, diff=False, verbosity=4)
+        context.CLIARGS = ImmutableDict(connection='smart', module_path=[self.module_path], forks=10, become=True, become_method='sudo', become_user='root', become_ask_pass=False, check=False, diff=False, verbosity=4, syntax=None, start_at_task=None, config_file='/Users/minsu/Documents/minsu/ansible/ansible.cfg')
 
         self.loader = DataLoader()
-        self.inventory = InventoryManager(loader=self.loader, sources='/Users/minsu/Documents/minsu/ansible/inventory')
+        self.inventory = InventoryManager(loader=self.loader, sources=self.inventory)
+        self.inventory.subset(['ci81hf1cmp003','ci81hf1cmp001','ci81hf1cmp002'])
         self.variable_manager = VariableManager(loader=self.loader, inventory=self.inventory)
+        self.variable_manager._extra_vars = {"ansible_ssh_pass": self.ssh_pass}
         print(self.variable_manager.get_vars())
 
     def run_model(self, module_name, module_args):
@@ -112,9 +119,10 @@ class AnsibleRunner(object):
         module_name: ansible module_name
         module_args: ansible module args
         """
+
         play_source = dict(
             name="Ansible Play",
-            hosts=self.ips,
+            hosts=self.hosts,
             gather_facts='no',
             tasks=[dict(action=dict(module=module_name, args=module_args))]
         )
@@ -128,17 +136,39 @@ class AnsibleRunner(object):
                 inventory=self.inventory,
                 variable_manager=self.variable_manager,
                 loader=self.loader,
-                passwords=self.passwords,
+                passwords=None,
                 stdout_callback="minimal",
             )
             tqm._stdout_callback = self.callback
-            constants.HOST_KEY_CHECKING = False 
+            constants.HOST_KEY_CHECKING = False
             tqm.run(play)
         except Exception as err:
             print(traceback.print_exc())
         finally:
             if tqm is not None:
                 tqm.cleanup()
+
+    def run_playbook(self, playbook_path, extra_vars=None):
+        """
+        运行playbook
+        """
+        self.playbook_path = playbook_path
+        import traceback
+        try:
+            self.callback = PlayBookResultsCollector()
+            if extra_vars:
+                self.variable_manager._extra_vars = extra_vars
+            executor = PlaybookExecutor(
+                playbooks=[playbook_path], inventory=self.inventory, variable_manager=self.variable_manager,
+                loader=self.loader,
+                passwords=None,
+            )
+            executor._tqm._stdout_callback = self.callback
+            constants.HOST_KEY_CHECKING = False
+            executor.run()
+        except Exception as err:
+            print(traceback.print_exc())
+            return False
 
     def get_model_result(self):
         self.results_raw = {'success': {}, 'failed': {}, 'unreachable': {}}
@@ -157,83 +187,37 @@ class AnsibleRunner(object):
         return self.results_raw
 
     def get_playbook_result(self):
-        self.results_raw = {'skipped': {}, 'failed': {}, 'ok': {}, "status": {}, 'unreachable': {}, "changed": {}}
+        self.results_raw = {'skipped': {}, 'failed': {}, 'ok': {}, 'unreachable': {}, 'status': {}}
         for host, result in self.callback.task_ok.items():
             self.results_raw['ok'][host] = result._result
+        self.results_raw['ok']['number'] = len(self.callback.task_ok.items())
 
         for host, result in self.callback.task_failed.items():
             self.results_raw['failed'][host] = result._result
+        self.results_raw['failed']['number'] = len(self.callback.task_failed.items())
+
+        for host, result in self.callback.task_skipped.items():
+            self.results_raw['skipped'][host] = result._result
+        self.results_raw['skipped']['number'] = len(self.callback.task_skipped.items())
+
+        for host, result in self.callback.task_unreachable.items():
+            self.results_raw['unreachable'][host] = result._result
+        self.results_raw['unreachable']['number'] = len(self.callback.task_unreachable.items())
 
         for host, result in self.callback.task_status.items():
             self.results_raw['status'][host] = result
 
-        for host, result in self.callback.task_skipped.items():
-            self.results_raw['skipped'][host] = result._result
-
-        for host, result in self.callback.task_unreachable.items():
-            self.results_raw['unreachable'][host] = result._result
         return self.results_raw
 
 
 if __name__ == '__main__':
-    host="10.225.28.32"
-    rbt = AnsibleRunner(host)
-    rbt.run_model('shell','cat /etc/redhat-release')
-    result = json.dumps(rbt.get_model_result(),indent=4)
+    rbt = AnsibleRunner(module_path='/Users/minsu/Documents/minsu/ansible/ocp_ansible_module', inventory='/Users/minsu/Documents/minsu/ansible/ocp_ansible_module/environment/dev-ocp2/hosts_multihost')  rbt.run_playbook(playbook_path='/Users/minsu/Documents/minsu/ansible/ocp_ansible_module/roles/haproxy/tasks/main.yml', extra_vars={"ansible_ssh_pass": '***', "ansible_sudo_pass": "***"})
+    result = json.dumps(rbt.get_playbook_result(),indent=4)
     print(result)
 ```
 
-inventory定义
+* 初始化的时候`config_file='/Users/minsu/Documents/minsu/ansible/ansible.cfg'`导入ansible配置文件
 
-```shell
-(ansible) MINSU-M-M1RW:ansible minsu$ cat /Users/minsu/Documents/minsu/ansible/inventory
-[host]
-10.225.28.32 ansible_ssh_user=ocp ansible_ssh_pass='********'
-```
-
-其实就是通过ansible对传入的主机`10.225.28.32`跑了一个shell module，命令是`cat /etc/redhat-release`，然后把返回结果打印出来了
-
-```json
-{
-    "success": {
-        "10_225_28_32": {
-            "changed": true,
-            "end": "2020-05-28 11:39:25.881297",
-            "stdout": "CentOS Linux release 7.4.1708 (Core) ",
-            "cmd": "cat /etc/redhat-release",
-            "rc": 0,
-            "start": "2020-05-28 11:39:25.875846",
-            "stderr": "",
-            "delta": "0:00:00.005451",
-            "invocation": {
-                "module_args": {
-                    "creates": null,
-                    "executable": null,
-                    "_uses_shell": true,
-                    "strip_empty_ends": true,
-                    "_raw_params": "cat /etc/redhat-release",
-                    "removes": null,
-                    "argv": null,
-                    "warn": true,
-                    "chdir": null,
-                    "stdin_add_newline": true,
-                    "stdin": null
-                }
-            },
-            "stdout_lines": [
-                "CentOS Linux release 7.4.1708 (Core) "
-            ],
-            "stderr_lines": [],
-            "ansible_facts": {
-                "discovered_interpreter_python": "/usr/bin/python"
-            },
-            "_ansible_no_log": false
-        }
-    },
-    "failed": {},
-    "unreachable": {}
-}
-```
-
-
-
+* `verbosity=4`必须是数字，否则会报错，后面会比较大小
+* `syntax=None, start_at_task=None`，必须有定义，否则会报key不存在
+* `self.inventory.subset(['ci81hf1cmp003','ci81hf1cmp001','ci81hf1cmp002'])`，就是`--limit`一样
