@@ -224,17 +224,25 @@ if __name__ == '__main__':
     print(result)
 ```
 
-值得注意的是
+值得注意的是，roles_path的定义
+
+可以在dataloader里set_basedir
+
+```shell
+        self.loader = DataLoader()
+        self.loader.set_basedir('/opt/airflow/dags/ocp_ansible_module')
+```
+
+也可以配置在config_file里
 
 ```python
 context.CLIARGS = ImmutableDict(connection='smart', module_path=[self.module_path], roles_path=self.roles_path, forks=10, become=True, become_method='sudo', become_user='root', become_ask_pass=False, check=False, diff=False, verbosity=4, syntax=None, start_at_task=None, config_file='ansible.cfg')
 ```
 
-在这里定义context，前面的参数不管怎么定义，一旦定义了`config_file='ansible.cfg'`，会以config_file里定义的为准，我试着在外面定义roles_path传进去，怎么都不生效，是因为在ansible.cfg里有默认的roles_path定义。
+在ansible.cfg里有默认的roles_path定义
 
-```python
-    rbt = AnsibleRunner(inventory='ocp_ansible_module/environment/dev-ocp2/hosts_multihost',
-                        roles_path='ocp_ansible_module/roles')
+```shelll
+roles_path = ocp_ansible_module/roles
 ```
 
 inventory跟roles_path定义都是可以相对路径的
