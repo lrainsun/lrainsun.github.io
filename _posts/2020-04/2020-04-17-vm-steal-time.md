@@ -15,6 +15,8 @@ typora-root-url: ../
 
 但是进到vm里top获取到vm内部的steal time不太现实，有个开源工具[kvmtop](https://github.com/cha87de/kvmtop)通过计算获取到了这个值，但这个工具我们要用起来，还得每个hypervisor都安装，并跑起来，再通过exporter去读取数据，有点麻烦。kvmtop是用go来实现的，我们可以把逻辑看明白了，转换到python。因为我们已经有一个自定义的distributed exporter分在所有hypervisor上了。如果代码看明白了，可以直接加到这个exporter里就好了。
 
+需要mount `-v /var/run/libvirt/libvirt-sock:/var/run/libvirt/libvirt-sock`
+
 # 步骤
 
 ## 发现对象 —— kvm process

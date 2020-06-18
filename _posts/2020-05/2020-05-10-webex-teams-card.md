@@ -76,3 +76,5 @@ GET /attachment/actions/Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNj
 [2] [https://github.com/CiscoDevNet/webexteamssdk](https://github.com/CiscoDevNet/webexteamssdk)
 
 [3] [https://github.com/CiscoSE/pyadaptivecards](https://github.com/CiscoSE/pyadaptivecards)
+
+[4] [https://adaptivecards.io/](https://adaptivecards.io/)
