@@ -195,7 +195,10 @@ rabbitmq默认是批量的形式进行同步的，之前的版本默认是同步
 
 比如，` ha-sync-batch-size`设置为50000 message，每条message平均1kb，那么每次node间的sync大约在49M，需要确认network是可以处理这个流量的，如果花费了超过net_tricktime的时间来传送一个batch的message，会被认为发生了network partition。
 
+很重要的一点是：当一个queue正在做同步的时候，所有其他的queue的operations都是会被blocked的，而由于多种因素，一个queue在同步的时候，可能会被block几分钟，几小时，甚至几天。关于同步的设置：
 
+* `ha-sync-mode: manual`：默认配置，queue的mirror不会收已存在消息，只会接受新消息
+* `ha-sync-mode: automatic`：当新的mirror加入的时候，会自动同步所有的消息
 
 # References
 
