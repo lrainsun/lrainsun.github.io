@@ -16,7 +16,7 @@ typora-root-url: ../E
 所以根据类似这样，可以用命令行来创建，我们用的是password_auth的认证后端
 
 ```shell
-airflow users create --username admin --firstname Peter --lastname Parker --role Admin --email spiderman@superhero.org
+airflow create_user -r Admin -u ocp -e ocp@cisco.com -f admin -l user -p password
 ```
 
 这样启动web认证
