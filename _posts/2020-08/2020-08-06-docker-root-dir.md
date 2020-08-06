@@ -49,13 +49,7 @@ service docker stop
 
 ```shell
 mkdir -p /home/ocpadmin/docker
-rsync -avz rsync -avz /var/lib/docker /home/ocpadmin/docker/
-```
-
-或者
-
-```shell
-cp rsync -avz /var/lib/docker /home/ocpadmin/docker/ -rf
+rsync -avz rsync -avz /var/lib/docker /home/ocpadmin/
 ```
 
 配置root dir
