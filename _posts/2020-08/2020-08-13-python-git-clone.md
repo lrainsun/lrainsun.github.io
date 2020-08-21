@@ -39,3 +39,10 @@ from git import Repo
 repo = Repo.clone_from('https://access_token:x-oauth-basic@wwwin-github.cisco.com/webex-iaas/releases.git', '/Users/minsu/Documents/minsu/github', branch='master')
 ```
 
+checkout某个commit
+
+```python
+repo = git.Repo.clone_from('https://access_token:x-oauth-basic@wwwin-github.cisco.com/webex-iaas/ocp-release.git', '/Users/minsu/Documents/minsu/github/ocp-release')
+repo.git.checkout('55798aa6560e6586afbed76fd5a804165bac0412')
+```
+
