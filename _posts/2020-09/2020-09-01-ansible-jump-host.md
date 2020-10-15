@@ -52,3 +52,4 @@ ansible-playbook -i private-inventory check-release.yml --private-key key --ssh-
 后者的key是给我们jump server用的，通过哪个key来登录jump server
 
 这两个key都需要，缺一不可
+
