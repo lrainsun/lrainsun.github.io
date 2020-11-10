@@ -79,10 +79,39 @@ o.class.name)
 TypeError: Object of type V1Pod is not JSON serializable
 ```
 
-而在kubernetes 1.14版本就可以的，但是遇到了新问题，在实验dag里指定Image都是没问题的，但是在我们的dag里始终有问题，查了好久，最终发现，Import了这两个包，跑ansible的时候需要用到的，加了这两个Import，再指定Image，就会让pod run不起来，目前还不知道是什么原因。
+而在kubernetes 1.14版本就可以的，但是遇到了新问题，在实验dag里指定Image都是没问题的，但是在我们的dag里始终有问题，查了好久，最终发现，Import了这两个包，跑ansible的时候需要用到的，加了这两个Import，再指定Image，就会让pod run不起来
 
 ```python
 from ansible.executor.task_queue_manager import TaskQueueManager
 from ansible.executor.playbook_executor import PlaybookExecutor
+```
+
+最后发现是因为ansible python api对于2.4.2跟新版本之前是有差距的
+
+```python
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 256, in process_file
+    m = imp.load_source(mod_name, filepath)
+  File "/usr/local/lib/python3.7/imp.py", line 171, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 696, in _load
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/test_dag.py", line 6, in <module>
+    from ansible_runner import AnsibleRunner
+  File "/opt/airflow/dags/ansible_runner.py", line 3, in <module>
+    from ansible import context
+ImportError: cannot import name 'context' from 'ansible' (/home/airflow/.local/lib/python3.7/site-packages/ansible/__init__.py)
+Traceback (most recent call last):
+  File "/home/airflow/.local/bin/airflow", line 37, in <module>
+    args.func(args)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/cli.py", line 76, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/bin/cli.py", line 538, in run
+    dag = get_dag(args)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/bin/cli.py", line 164, in get_dag
+    'parse.'.format(args.dag_id))
+airflow.exceptions.AirflowException: dag_id could not be found: xxx_ocp_2x_add_compute_node_for_ed264731-6d33-41f2-b14d-eb4039c5802b. Either the dag did not exist or it failed to parse.
 ```
 
