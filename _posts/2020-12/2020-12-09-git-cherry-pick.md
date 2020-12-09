@@ -94,6 +94,21 @@ Fast-forward
  ocp_2x/ocp_2x_add_compute_node/templates/ocp_2x_add_compute_node_dag.j2 | 38 +++++++++++++++++++-------------------
  zerotouchlib/db.py                                                      | 11 ++++++-----
  3 files changed, 26 insertions(+), 25 deletions(-)
+ 
+# 把提交push到远端
+MINSU-M-M1RW:ocp_dags minsu$ git push origin dags-staging
+Warning: Permanently added 'sdpgit.webex.com,10.252.3.64' (ECDSA) to the list of known hosts.
+Counting objects: 13, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (13/13), 1.30 KiB | 0 bytes/s, done.
+Total 13 (delta 8), reused 0 (delta 0)
+remote:
+remote: To create a merge request for dags-staging, visit:
+remote:   https://sdpgit.webex.com/iaas_cm/ocp/ocp_dags/merge_requests/new?merge_request%5Bsource_branch%5D=dags-staging
+remote:
+To git@sdpgit.webex.com:iaas_cm/ocp/ocp_dags.git
+   241998a..49ba560  dags-staging -> dags-staging
 ```
 
 # References
