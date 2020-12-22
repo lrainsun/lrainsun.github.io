@@ -62,11 +62,22 @@ commits.reverse()
         print('**************************************************')
 ```
 
-还有一个问题，这样打印出来之后，发现有一些重复的commit，原来是个人的commit以及Merge到分支的commit，其实我们需要的是Merge到stable分支的commit，所以这样过滤一下
+还有一个问题，这样打印出来之后，发现有一些重复的commit，原来是个人的commit以及Merge到分支的commit，比如：
+
+https://github.com/openstack/kolla-ansible/commit/5d09ab68417705c37e94319f713abb20017e2559
+
+跟https://github.com/openstack/kolla-ansible/commit/5f2825943a35d80d55e3d427aa3eb32935d0cc09#diff-0cb87f727f31e5f5a59cca8a10c8f9b55622be05305d4e7e92c334f5911e1034
+
+看起来我们需要前者，因为前者的message信息更完整
 
 ```python
-        if not commit.committer or commit.committer and not commit.committer.login == 'openstack-gerrit':
-            # skip user commit
+def merged_commit(commit):
+    if commit.commit.committer.name == 'Gerrit Code Review' or commit.commit.author.name == 'Zuul':
+        return True
+    return False
+  
+          if merged_commit(commit):
+            # skip merged commit
             continue
 ```
 
