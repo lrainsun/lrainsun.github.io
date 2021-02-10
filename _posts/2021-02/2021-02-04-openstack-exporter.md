@@ -41,3 +41,15 @@ collected metric "openstack_nova_agent_state" { label:<name:"adminState" value:"
 | 2021-02-03 03:04:23 | 2021-02-04 09:24:09 | NULL | 2 | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor | conductor | 10916 | 0 | 0 | NULL | 2021-02
 | 2021-02-03 03:05:23 | 2021-02-04 09:24:40 | NULL | 2 | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor | conductor | 10914 | 0 | 0 | NULL | 2021-02-04 0
 ```
+
+这个其实是很难避免的，直接用的数据库的seq id，不同表容易出现重复
+
+```shell
+MariaDB [nova_cell0]> select * from services;
++---------------------+---------------------+------------+-----+--------------------------------------------+--------------------+-----------+--------------+----------+---------+-----------------+---------------------+-------------+---------+--------------------------------------+
+| created_at          | updated_at          | deleted_at | id  | host                                       | binary             | topic     | report_count | disabled | deleted | disabled_reason | last_seen_up        | forced_down | version | uuid                                 |
++---------------------+---------------------+------------+-----+--------------------------------------------+--------------------+-----------+--------------+----------+---------+-----------------+---------------------+-------------+---------+--------------------------------------+
+| 2021-02-03 03:04:23 | 2021-02-04 14:06:33 | NULL       |   2 | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor     | conductor |        12610 |        0 |       0 | NULL            | 2021-02-04 14:06:33 |           0 |      51 | 90a34d86-d651-4fe0-ba8a-2ef92aec275e |
+| 2021-02-03 03:04:28 | 2021-02-04 14:06:27 | NULL       |  11 | ctrl-3.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor     | conductor |        12607 |        0 |       0 | NULL            | 2021-02-04 14:06:27 |           0 |      51 | 674dd729-eb6f-46ce-aeef-9fc5fc26595c |
+| 2021-02-03 03:04:49 | 2021-02-04 14:06:37 | NULL       |  26 | ctrl-2.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor     | conductor |        12605 |        0 |       0 | NULL            | 2021-02-04 14:06:37 |           0 |      51 | 209e3b79-910d-4387-9d9f-0fade1b4f66a |
+```
