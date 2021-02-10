@@ -57,3 +57,41 @@ MariaDB [nova_cell0]> select * from services;
 感觉上是可以用uuid作为label更好
 
 那我们就需要修改[openstack exporter](https://github.com/openstack-exporter/openstack-exporter)的代码，其实代码修改不难，在exporters/nova.go，agent_state我尝试加了service的uuid，但是，改好之后`go build`，提示如下错误：
+
+
+```go
+exporters/nova.go:121:52: service.UUID undefined (type "github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/services".Service has no field or method UUID)
+```
+
+在go的依赖库里面`https://github.com/gophercloud/gophercloud/blob/master/openstack/compute/v2/extensions/services/results.go`
+
+```go
+type Service struct {
+	// The binary name of the service.
+	Binary string `json:"binary"`
+
+	// The reason for disabling a service.
+	DisabledReason string `json:"disabled_reason"`
+
+	// Whether or not service was forced down manually.
+	ForcedDown bool `json:"forced_down"`
+
+	// The name of the host.
+	Host string `json:"host"`
+
+	// The id of the service.
+	ID string `json:"-"`
+
+	// The state of the service. One of up or down.
+	State string `json:"state"`
+
+	// The status of the service. One of enabled or disabled.
+	Status string `json:"status"`
+
+	// The date and time when the resource was updated.
+	UpdatedAt time.Time `json:"-"`
+
+	// The availability zone name.
+	Zone string `json:"zone"`
+}
+```
