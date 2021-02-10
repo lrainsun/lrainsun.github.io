@@ -109,7 +109,33 @@ service并没有提供uuid。。那么我就挑个UpdatedAt来做区分吧。。
 
 然后go build，然后把编译后的二进制文件拷贝到docker/prometheus/prometheus-openstack-exporter/，并修改docker/prometheus/prometheus-openstack-exporter/Dockerfile.j2
 
-```makefile
+```
 RUN mkdir -p /opt/openstack-exporter
 COPY openstack-exporter /opt/openstack-exporter/openstack-exporter
 ```
+
+然后docker kolla image `python3 tools/build.py -b centos --type source prometheus-openstack-exporter --openstack-release ussuri`
+
+最后到环境上试，结果没跑起来，错误如下：
+
+```shell
+/usr/local/bin/kolla_start: line 24: /opt/openstack-exporter/openstack-exporter: cannot execute binary file: Exec format error
+```
+
+网上查了一下，这个应该是因为编译环境不同，因为我在mac上build的，而我们最终跑在linux上。为了偷懒。。
+
+然后我又在linux上装了一下golang
+
+```shell
+wget https://golang.org/dl/go1.15.7.linux-amd64.tar.gz
+tar -C /usr/local -zxvf  go1.15.7.linux-amd64.tar.gz
+```
+
+编辑`/etc/profile`，增加两行到最后
+
+```shell
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+```
+
+`source /etc/profile`即时生效，然后在继续go build，打包，上环境
