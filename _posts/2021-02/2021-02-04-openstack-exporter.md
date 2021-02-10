@@ -95,3 +95,14 @@ type Service struct {
 	Zone string `json:"zone"`
 }
 ```
+
+service并没有提供uuid。。那么我就挑个UpdatedAt来做区分吧。。
+
+最终修改nova.go代码如下：
+
+```go
+{Name: "agent_state", Labels: []string{"id", "hostname", "service", "adminState", "zone", "disabledReason", "UpdatedAt"}, Fn: ListNovaAgentState},
+
+                ch <- prometheus.MustNewConstMetric(exporter.Metrics["agent_state"].Metric,
+                        prometheus.CounterValue, float64(state), service.ID, service.Host, service.Binary, service.Status, service.Zone, service.DisabledReason, service.UpdatedAt.String())
+```
