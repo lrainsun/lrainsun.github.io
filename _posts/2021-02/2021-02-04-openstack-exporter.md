@@ -110,24 +110,6 @@ service并没有提供uuid。。那么我就挑个UpdatedAt来做区分吧。。
 然后go build，然后把编译后的二进制文件拷贝到docker/prometheus/prometheus-openstack-exporter/，并修改docker/prometheus/prometheus-openstack-exporter/Dockerfile.j2
 
 ```makefile
-FROM {{ namespace }}/{{ infra_image_prefix }}prometheus-base:{{ tag }}
-{% block labels %}
-LABEL maintainer="{{ maintainer }}" name="{{ image_name }}" build-date="{{ build_date }}"
-{% endblock %}
-
-{% block prometheus_openstack_exporter_header %}{% endblock %}
-
-{% block prometheus_openstack_exporter_repository_version %}
-ENV prometheus_openstack_exporter_version=1.3.0
-{% endblock %}
-
-{% block prometheus_openstack_exporter_install %}
 RUN mkdir -p /opt/openstack-exporter
 COPY openstack-exporter /opt/openstack-exporter/openstack-exporter
-{% endblock %}
-
-{% block prometheus_openstack_exporter_footer %}{% endblock %}
-{% block footer %}{% endblock %}
-
-USER prometheus
 ```
