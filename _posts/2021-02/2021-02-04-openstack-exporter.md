@@ -32,3 +32,12 @@ collected metric "openstack_nova_agent_state" { label:<name:"adminState" value:"
 | 90a34d86-d651-4fe0-ba8a-2ef92aec275e | nova-conductor | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | internal | enabled | up | 2021-02-04T09:14:49.000000 | - | False |
 | 9e47adc8-8302-4d21-a26f-cad1b70b4fc1 | nova-conductor | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | internal | enabled | up | 2021-02-04T09:14:50.000000 | - | False |
 ```
+
+一个在cell0数据库里边，一个在cell1库里
+
+而且就这么巧，ctrl-1上的nova-conductor跟nova-super-conductor连ID都是一样的
+
+```shell
+| 2021-02-03 03:04:23 | 2021-02-04 09:24:09 | NULL | 2 | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor | conductor | 10916 | 0 | 0 | NULL | 2021-02
+| 2021-02-03 03:05:23 | 2021-02-04 09:24:40 | NULL | 2 | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor | conductor | 10914 | 0 | 0 | NULL | 2021-02-04 0
+```
