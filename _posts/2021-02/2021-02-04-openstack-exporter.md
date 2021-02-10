@@ -66,38 +66,40 @@ exporters/nova.go:121:52: service.UUID undefined (type "github.com/gophercloud/g
 
 type Service struct {
 	// The binary name of the service.
-	Binary string `json:"binary"`
+	Binary string json:"binary"
 
 	// The reason for disabling a service.
-	DisabledReason string `json:"disabled_reason"`
+	DisabledReason string json:"disabled_reason"
 
 	// Whether or not service was forced down manually.
-	ForcedDown bool `json:"forced_down"`
+	ForcedDown bool json:"forced_down"
 
 	// The name of the host.
-	Host string `json:"host"`
+	Host string json:"host"
 
 	// The id of the service.
-	ID string `json:"-"`
+	ID string json:"-"
 
 	// The state of the service. One of up or down.
-	State string `json:"state"`
+	State string json:"state"
 
 	// The status of the service. One of enabled or disabled.
-	Status string `json:"status"`
+	Status string json:"status"
 
 	// The date and time when the resource was updated.
-	UpdatedAt time.Time `json:"-"`
+	UpdatedAt time.Time json:"-"
 
 	// The availability zone name.
-	Zone string `json:"zone"`
+	Zone string json:"zone"
 }
-
 
 service并没有提供uuid。。那么我就挑个UpdatedAt来做区分吧。。
 
 最终修改nova.go代码如下:
 
+{Name: "agent_state", Labels: []string{"id", "hostname", "service", "adminState", "zone", "disabledReason", "UpdatedAt"}, Fn: ListNovaAgentState},
+
+prometheus.MustNewConstMetric(exporter.Metrics["agent_state"].Metric, prometheus.CounterValue, float64(state), service.ID, service.Host, service.Binary, service.Status, service.Zone, service.DisabledReason, service.UpdatedAt.String())
 
 
 然后go build，然后把编译后的二进制文件拷贝到docker/prometheus/prometheus-openstack-exporter/，并修改docker/prometheus/prometheus-openstack-exporter/Dockerfile.j2
