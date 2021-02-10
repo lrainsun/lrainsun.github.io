@@ -53,3 +53,7 @@ MariaDB [nova_cell0]> select * from services;
 | 2021-02-03 03:04:28 | 2021-02-04 14:06:27 | NULL       |  11 | ctrl-3.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor     | conductor |        12607 |        0 |       0 | NULL            | 2021-02-04 14:06:27 |           0 |      51 | 674dd729-eb6f-46ce-aeef-9fc5fc26595c |
 | 2021-02-03 03:04:49 | 2021-02-04 14:06:37 | NULL       |  26 | ctrl-2.ocp-dev-sjc02-d.cloud.prv.webex.com | nova-conductor     | conductor |        12605 |        0 |       0 | NULL            | 2021-02-04 14:06:37 |           0 |      51 | 209e3b79-910d-4387-9d9f-0fade1b4f66a |
 ```
+
+感觉上是可以用uuid作为label更好
+
+那我们就需要修改[openstack exporter](https://github.com/openstack-exporter/openstack-exporter)的代码，其实代码修改不难，在exporters/nova.go，agent_state我尝试加了service的uuid，但是，改好之后`go build`，提示如下错误：
