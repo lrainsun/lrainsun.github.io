@@ -64,7 +64,6 @@ exporters/nova.go:121:52: service.UUID undefined (type "github.com/gophercloud/g
 
 在go的依赖库里面`https://github.com/gophercloud/gophercloud/blob/master/openstack/compute/v2/extensions/services/results.go`
 
-```go
 type Service struct {
 	// The binary name of the service.
 	Binary string `json:"binary"`
@@ -93,7 +92,7 @@ type Service struct {
 	// The availability zone name.
 	Zone string `json:"zone"`
 }
-```
+
 
 service并没有提供uuid。。那么我就挑个UpdatedAt来做区分吧。。
 
