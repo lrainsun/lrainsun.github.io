@@ -97,9 +97,9 @@ type Service struct {
 
 service并没有提供uuid。。那么我就挑个UpdatedAt来做区分吧。。
 
-最终修改nova.go代码如下：
+最终修改nova.go代码如下:
 
-```go
+```
 {Name: "agent_state", Labels: []string{"id", "hostname", "service", "adminState", "zone", "disabledReason", "UpdatedAt"}, Fn: ListNovaAgentState},
 
                 prometheus.MustNewConstMetric(exporter.Metrics["agent_state"].Metric,
