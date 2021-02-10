@@ -3,7 +3,7 @@ layout: post
 title:  "为什么要架构设计？"
 date:   2021-02-09 23:00:00 +0800
 categories: Architecture
-tags: Prometheus-Exporter
+tags: Architecture
 excerpt: 为什么要架构设计？
 mathjax: true
 typora-root-url: ../
