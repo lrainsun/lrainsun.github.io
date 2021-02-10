@@ -20,3 +20,15 @@ An error has occurred while serving metrics:
 collected metric "openstack_nova_agent_state" { label:<name:"adminState" value:"enabled" > label:<name:"disabledReason" value:"" > label:<name:"hostname" value:"ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com" > label:<name:"id" value:"2" > label:<name:"service" value:"nova-conductor" > label:<name:"zone" value:"internal" > counter:<value:1 > } was collected before with the same name and label values
 ```
 
+换了好多image也不管用，之前19年有过这个[bug](https://github.com/openstack-exporter/openstack-exporter/issues/37)，但是看起来，我们已经是新代码了，label里已经有ID，那为啥还有问题呢？
+
+又仔细读了一下错误日志，跑到Openstack环境看了一下才知道，原来
+
+![image-20210204225746822](/../assets/images/image-20210204225746822.png)
+
+启用了cell之后，nova conductor有两个，一个是nova conductor，一个是nova super conductor，但是呢他们的名字又都叫nova-conductor
+
+```
+| 90a34d86-d651-4fe0-ba8a-2ef92aec275e | nova-conductor | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | internal | enabled | up | 2021-02-04T09:14:49.000000 | - | False |
+| 9e47adc8-8302-4d21-a26f-cad1b70b4fc1 | nova-conductor | ctrl-1.ocp-dev-sjc02-d.cloud.prv.webex.com | internal | enabled | up | 2021-02-04T09:14:50.000000 | - | False |
+```
