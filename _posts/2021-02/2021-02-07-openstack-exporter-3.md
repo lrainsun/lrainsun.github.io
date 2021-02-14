@@ -38,3 +38,7 @@ func NewNovaExporter(config *ExporterConfig) (*NovaExporter, error) {
 ```
 
 如果可以获取到主版本是2.1的microversion，那么就用那个microversion，根据server端的支持能力来请求
+
+把这个fix提到社区了
+
+https://github.com/openstack-exporter/openstack-exporter/commit/02d06719b491830d1856ffe05433151744ee0556
