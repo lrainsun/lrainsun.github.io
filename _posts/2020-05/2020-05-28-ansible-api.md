@@ -2,8 +2,8 @@
 layout: post
 title:  "Ansible Python API初探"
 date:   2020-05-28 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible-pythonapi
 excerpt: Ansible API初探
 mathjax: true
 typora-root-url: ../

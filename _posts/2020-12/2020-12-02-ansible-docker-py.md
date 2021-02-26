@@ -2,8 +2,8 @@
 layout: post
 title:  "docker-py版本不一致导致的错误"
 date:   2020-12-02 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible
 excerpt: docker-py版本不一致导致的错误
 mathjax: true
 typora-root-url: ../

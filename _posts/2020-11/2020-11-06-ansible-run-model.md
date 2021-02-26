@@ -2,8 +2,8 @@
 layout: post
 title:  "Ansible Python API run model"
 date:   2020-11-06 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible-pythonapi
 excerpt: Ansible Python API run model
 mathjax: true
 typora-root-url: ../

@@ -2,8 +2,8 @@
 layout: post
 title:  "Ansible vars"
 date:   2021-01-15 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible-pythonapi
 excerpt: Ansible vars
 mathjax: true
 typora-root-url: ../

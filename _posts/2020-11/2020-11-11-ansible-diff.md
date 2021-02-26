@@ -2,8 +2,8 @@
 layout: post
 title:  "Ansible版本差异"
 date:   2020-11-11 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible
 excerpt: Ansible版本差异
 mathjax: true
 typora-root-url: ../

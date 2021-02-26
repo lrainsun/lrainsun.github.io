@@ -2,8 +2,8 @@
 layout: post
 title:  "Ansible strategy"
 date:   2020-06-07 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible-pythonapi
 excerpt: Ansible strategy
 mathjax: true
 typora-root-url: ../

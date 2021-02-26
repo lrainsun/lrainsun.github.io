@@ -2,8 +2,8 @@
 layout: post
 title:  "Ansible启动container"
 date:   2021-01-28 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible
 excerpt: Ansible启动container
 mathjax: true
 typora-root-url: ../

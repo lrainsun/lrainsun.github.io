@@ -2,8 +2,8 @@
 layout: post
 title:  "ansible lineinfile"
 date:   2020-12-27 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible
 excerpt: ansible lineinfile
 mathjax: true
 typora-root-url: ../

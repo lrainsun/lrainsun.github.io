@@ -2,8 +2,8 @@
 layout: post
 title:  "Ansible module path"
 date:   2020-06-06 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible-pythonapi
 excerpt: Ansible module path
 mathjax: true
 typora-root-url: ../

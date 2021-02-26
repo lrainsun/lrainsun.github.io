@@ -2,8 +2,8 @@
 layout: post
 title:  "从远程主机上下载文件"
 date:   2020-06-11 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible-pythonapi
 excerpt: 从远程主机上下载文件
 mathjax: true
 typora-root-url: ../

@@ -2,8 +2,8 @@
 layout: post
 title:  "ansible jump server"
 date:   2020-09-01 23:00:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible-pythonapi
 excerpt: ansible jump server
 mathjax: true
 typora-root-url: ../

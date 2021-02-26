@@ -2,8 +2,8 @@
 layout: post
 title:  "ansible run using tags"
 date:   2020-08-21 23:01:00 +0800
-categories: Airflow
-tags: Airflow-Tutorial
+categories: Ansible
+tags: Ansible-pythonapi
 excerpt: ansible run using tags
 mathjax: true
 typora-root-url: ../
