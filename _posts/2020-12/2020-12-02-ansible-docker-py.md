@@ -21,7 +21,7 @@ typora-root-url: ../
 
 我们的ansible跑在airflow里，用的是最新版本的ansible 2.10，而我们要起的容器在host上，docker-py版本是`python-docker-py-1.10.6-11.el7.noarch`
 
-在ansible 2.10版本中，`home/airflow/.local/lib//python3.7/site-packages/ansible_collections/community/general/plugins/modules/docker_container.py`
+在ansible 2.10版本中，`/home/airflow/.local/lib//python3.7/site-packages/ansible_collections/community/general/plugins/modules/docker_container.py`
 
 ![img](/../assets/images/4597778.png)
 
@@ -52,6 +52,43 @@ typora-root-url: ../
         )
 ```
 
+`/usr/lib/python2.7/site-packages/docker/api/container.py`
+
+```python
+    @utils.minimum_version('1.22')
+    @utils.check_resource
+    def update_container(
+        self, container, blkio_weight=None, cpu_period=None, cpu_quota=None,
+        cpu_shares=None, cpuset_cpus=None, cpuset_mems=None, mem_limit=None,
+        mem_reservation=None, memswap_limit=None, kernel_memory=None
+    ):
+        url = self._url('/containers/{0}/update', container)
+        data = {}
+        if blkio_weight:
+            data['BlkioWeight'] = blkio_weight
+        if cpu_period:
+            data['CpuPeriod'] = cpu_period
+        if cpu_shares:
+            data['CpuShares'] = cpu_shares
+        if cpu_quota:
+            data['CpuQuota'] = cpu_quota
+        if cpuset_cpus:
+            data['CpusetCpus'] = cpuset_cpus
+        if cpuset_mems:
+            data['CpusetMems'] = cpuset_mems
+        if mem_limit:
+            data['Memory'] = utils.parse_bytes(mem_limit)
+        if mem_reservation:
+            data['MemoryReservation'] = utils.parse_bytes(mem_reservation)
+        if memswap_limit:
+            data['MemorySwap'] = utils.parse_bytes(memswap_limit)
+        if kernel_memory:
+            data['KernelMemory'] = utils.parse_bytes(kernel_memory)
+
+        res = self._post_json(url, data=data)
+        return self._result(res, True)
+```
+
 可以看到我们host上确实是不支持这个参数的，这个参数要docker-py 2.0.0以上版本才支持
 
 由于我们是一套airflow，需要同时支持旧版本跟新版本，所以在这里做了个workaround，修改了一下ansible里的代码
@@ -77,4 +114,10 @@ typora-root-url: ../
 ```
 
 先尝试update_container，如果失败，那么再去掉restart_policy参数再试一下
+
+redirecting (type: modules) ansible.builtin.docker_container to community.general.docker_container
+
+redirecting (type: modules) community.general.docker_container to community.docker.docker_container
+
+后来发现，会被redirecting，`/home/airflow/.local/lib//python3.7/site-packages/ansible_collections/community/docker/plugins/modules/docker_container.py`这里也要改一下
 
