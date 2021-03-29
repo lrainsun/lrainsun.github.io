@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "CPU Model的选取: host-model"
+title:  "nova中CPU Model的选取: host-model"
 date:   2021-03-27 23:00:00 +0800
 categories: Openstack
 tags: Openstack-Nova
-excerpt: CPU Model的选取: host-model
+excerpt: nova中CPU Model的选取: host-model
 mathjax: true
 typora-root-url: ../
 ---
