@@ -29,6 +29,12 @@ Deployment并不直接管理Pod，而是通过ReplicaSet，ReplicaSet再去管�
   * maxSurge：除了desired数量之外，deployment控制器还可以创建多少新pod（可以是个数，也可以是百分比，默认25%）
   * maxUnavailable：在一次滚动中，deployment控制器可以删除多少旧pod（可以是个数，也可以是百分比，默认25%）
 
+检查Update进程
+
+```
+kubectl rollout status deployment/nginx-deployment
+```
+
 # rollout历史
 
 回滚
